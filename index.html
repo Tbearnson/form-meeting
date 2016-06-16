@@ -1,7 +1,9 @@
 <html ng-app="cmsEntry">
   <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
     <link rel="stylesheet" href="app/styles/app.css" />
+    <link rel="stylesheet" href="app/views/sidebar/sidebar.css" />
     <link rel="stylesheet" href="app/views/summary/summary.css" />
     <link rel="stylesheet" href="app/views/detail/detail.css" />
 
@@ -18,14 +20,19 @@
     <script src="app.js"></script>
 
     <script src="app/utilities/services/Data.js"></script>
-    <script src="app/views/detail/detail.js"></script>
+    <script src="app/views/sidebar/sidebar.js"></script>
     <script src="app/views/summary/summary.js"></script>
+    <script src="app/views/detail/detail.js"></script>
 
-    
   </head>
   
   <body>
-  	<ui-view></ui-view>
+    <sidebar></sidebar>
+
+    <div class="main-container">
+        <ui-view></ui-view>
+    </div>
+
     <div class="domo-logo"></div>
   </body>
 </html>

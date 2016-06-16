@@ -3,6 +3,24 @@ body{
 	margin: 0;
 }
 
+.main-container {
+	position: absolute;
+	padding-left: 57.5px;
+	padding-right: 57.5px;
+    left: 50px;
+    top: 0px;
+    width: calc(100% - 50px);
+    height: 100%;
+}
+.page-title {
+	margin-top: 45px;
+	margin-left: 75px;
+	margin-bottom: 50px;
+
+	font-weight: 300;
+	text-align: left;
+}
+
 div.domo-logo {
 	position: absolute;
 	bottom: 25px;
