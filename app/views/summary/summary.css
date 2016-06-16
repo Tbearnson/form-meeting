@@ -39,8 +39,8 @@ hr {
 
 /* MAIN CONTENT */
 .tiles {
-	padding-left: 100px;
-	padding-right: 100px;
+	padding-left: 57.5px;
+	padding-right: 57.5px;
 }
 .tile {
 	position: relative;
@@ -48,33 +48,44 @@ hr {
 
 	cursor: pointer;
 
-	width: 350px;
-	height: 60px;
-	max-height: 60px;
+	width: 300px;
+	height: 50px;
+	max-height: 50px;
 	margin-left: 25px;
 	margin-right: 25px;
 	margin-bottom: 10px;
 
-	text-overflow: ellipsis;
+	overflow: hidden;
 }
 .tile div {
 	display: inline-block;
 }
 .tile-detail {
-	max-width: 275px;
-	max-height: 60px;
-	padding-right: 25px;
+	max-width: 300px;
+	max-height: 50px;
+	padding-right: 60px;
 
 	font-size: 12px;
+	display: table-cell; 
+  	vertical-align: middle;
 	text-align: right;
-	overflow: ellipsis;
+	overflow-y: hidden;
+
+	float: right;
 }
 
-.tile-title{
-	color: inherit;
-	width: 60px;
-	height: 60px;
+.tile-title {
+	position: absolute;
+	top: 0%;
+	right: 0%;
+
+	color: #FFF;;
+	width: 50px;
+	height: 50px;
 	font-size: 175%;
 	text-align: center;
 	padding-top: 3px;
 }
+.tile-title.Green { background-color: #84C068; }
+.tile-title.Yellow { background-color: #F78D49; }
+.tile-title.Red { background-color: #C92E25; }

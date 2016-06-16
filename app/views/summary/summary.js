@@ -13,7 +13,7 @@ function DeficiencySummaryController($state, $stateParams, Data, _){
 	var dsc = this;
 	dsc.pageTitle = "CMS Entry";
 	dsc.tiles = Data.tiles;
-	dsc.weekfilter = _.maxBy(dsc.tiles, 'Week').Week;
+	dsc.weekfilter = _.minBy(dsc.tiles, 'Week').Week;
 	dsc.order = 'CAP';
 	dsc.monitor = 'All';
 	dsc.status = {
