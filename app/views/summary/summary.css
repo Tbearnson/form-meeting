@@ -1,0 +1,80 @@
+/* HEADER CONTENT */
+.page-title{
+	text-align: center;
+}
+
+.navbar{
+	margin-bottom: 5px !important;
+}
+.navbar-form .form-control{
+	width: 250px !important;
+}
+
+.filter-label{
+	display: inline;
+	padding-left: 10px;
+	padding-right: 2px;
+}
+
+.styled-select {
+   /* background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 0; */
+   height: 29px;
+   overflow: hidden;
+   width: 125px;
+   color: white;
+}
+.semi-square {
+   -webkit-border-radius: 5px;
+   -moz-border-radius: 5px;
+   border-radius: 5px;
+}
+.blue { background-color: #337ab7; }
+.green { background-color: #84C068; }
+
+hr {
+    margin-top: 5px !important;
+    margin-bottom: 10px !important;
+}
+
+
+/* MAIN CONTENT */
+.tiles {
+	padding-left: 100px;
+	padding-right: 100px;
+}
+.tile {
+	position: relative;
+	display: inline-block;
+
+	cursor: pointer;
+
+	width: 350px;
+	height: 60px;
+	max-height: 60px;
+	margin-left: 25px;
+	margin-right: 25px;
+	margin-bottom: 10px;
+
+	text-overflow: ellipsis;
+}
+.tile div {
+	display: inline-block;
+}
+.tile-detail {
+	max-width: 275px;
+	max-height: 60px;
+	padding-right: 25px;
+
+	font-size: 12px;
+	text-align: right;
+	overflow: ellipsis;
+}
+
+.tile-title{
+	color: inherit;
+	width: 60px;
+	height: 60px;
+	font-size: 175%;
+	text-align: center;
+	padding-top: 3px;
+}
