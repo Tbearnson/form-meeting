@@ -81,19 +81,21 @@
 
 	}
 
-	function DeficiencyDetailsController($scope, $state, $stateParams, Data){
+	function DeficiencyDetailsController($state, $stateParams, Data){
+
+		var ddc = this;
 
 		console.log($stateParams);
-		$scope.pageTitle = "CMS Details"
+		ddc.pageTitle = "CMS Details"
 
-		$scope.tiles = Data.tiles;
-		$scope.printout = function(something) {
+		ddc.tiles = Data.tiles;
+		ddc.printout = function(something) {
 			console.log(Data);
 		};
 
-        $scope.data = $scope.tiles.filter(function(item){return item.CAP === $stateParams.cap_plus_deficiency;})[0];
+        ddc.data = ddc.tiles.filter(function(item){return item.CAP === $stateParams.cap_plus_deficiency;})[0];
 
-        $scope.goToSummary = function(){
+        ddc.goToSummary = function(){
         	$state.go('summary', {
         		state_values: $stateParams.prev_state_values,
         		prev_state_values: {
