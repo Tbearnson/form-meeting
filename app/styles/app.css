@@ -2,3 +2,16 @@
 body{
 	margin: 0;
 }
+
+div.domo-logo {
+	position: absolute;
+	bottom: 25px;
+	right: 25px;
+
+	height: 65px;
+	width: 65px;
+
+	background: #9ce;
+	background-image: url("/app/assets/domo.png");
+	background-size: 65px;
+}

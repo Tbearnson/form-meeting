@@ -1,6 +1,10 @@
 /* HEADER CONTENT */
-.page-title{
-	text-align: center;
+.page-title {
+	margin-top: 45px;
+	margin-left: 75px;
+
+	font-weight: 300;
+	text-align: left;
 }
 
 .navbar{
@@ -36,9 +40,57 @@ hr {
     margin-bottom: 10px !important;
 }
 
+.sidebar-container {
+	background-color: #f2f2f2;
+	border-right: 1px solid #e6e7e8;
+
+	position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 50px;
+    height: 100%;
+
+    z-index: 10;
+}
+.sidebar-container .toggle {
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwAgMAAAAqbBEUAAAADFBMVEUAAABWR1FVRU9XR1FX26AeAAAAA3RSTlMA40mAJZ3FAAAAO0lEQVQoz2MYsmD+fyD4AOXUI3MgNOkczv/fEBz2/38RHH4gpDGHE+QD/v//wRx2DA7QOQhlIIcOUQAARWw1MxuODbMAAAAASUVORK5CYII=) no-repeat;
+	height: 50px;
+	width: 50px;
+}
+.main-container {
+	position: absolute;
+    left: 50px;
+    top: 0px;
+    width: calc(100% - 50px);
+    height: 100%;
+}
+
+.slideout-menu {
+	position: absolute;
+    left: calc(-30% + 50px);
+    top: 0px;
+    width:30%;
+    height: 100%;
+    background-color: #fff;
+    opacity: .9;
+    border-right: 1px solid #e6e7e8;
+    z-index: 1;
+
+    -webkit-transition: left .4s ease;
+    transition: left .4s ease;
+}
+.slideout-menu.show {
+	left: 50px;
+
+	-webkit-transition: left .4s ease;
+    transition: left .4s ease;
+}
+
+
 
 /* MAIN CONTENT */
 .tiles {
+	margin-top: 50px;
 	padding-left: 57.5px;
 	padding-right: 57.5px;
 }
@@ -48,7 +100,7 @@ hr {
 
 	cursor: pointer;
 
-	width: 300px;
+	width: 280px;
 	height: 50px;
 	max-height: 50px;
 	margin-left: 25px;
@@ -58,20 +110,23 @@ hr {
 	overflow: hidden;
 }
 .tile div {
-	display: inline-block;
+	/*display: inline-block;*/
+	display: table;
 }
 .tile-detail {
 	max-width: 300px;
 	max-height: 50px;
-	padding-right: 60px;
+	padding-right: 70px;
 
 	font-size: 12px;
-	display: table-cell; 
-  	vertical-align: middle;
 	text-align: right;
 	overflow-y: hidden;
 
 	float: right;
+}
+.tile-detail p {
+	width: 200px;
+	height: 100%;
 }
 
 .tile-title {
@@ -84,7 +139,7 @@ hr {
 	height: 50px;
 	font-size: 175%;
 	text-align: center;
-	padding-top: 3px;
+	padding-top: 8px;
 }
 .tile-title.Green { background-color: #84C068; }
 .tile-title.Yellow { background-color: #F78D49; }
