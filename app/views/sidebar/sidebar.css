@@ -1,0 +1,39 @@
+.slideout-menu {
+	position: absolute;
+    left: calc(-30% + 50px);
+    top: 0px;
+    width:30%;
+    height: 100%;
+    background-color: rgba(255,255,255,.9);
+    border-right: 1px solid #e6e7e8;
+    z-index: 1;
+
+    -webkit-transition: left .2s ease;
+    transition: left .2s ease;
+}
+.slideout-menu.hint {
+	left: calc(-30% + 60px);
+
+	-webkit-transition: left .2s ease;
+    transition: left .2s ease;
+}
+.slideout-menu.show, .slideout-menu.show.hint {
+	left: 50px;
+
+	-webkit-transition: left .2s ease;
+    transition: left .2s ease;
+}
+
+
+.sidebar-container {
+	background-color: #f2f2f2;
+	border-right: 1px solid #e6e7e8;
+
+	position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 50px;
+    height: 100%;
+
+    z-index: 10;
+}

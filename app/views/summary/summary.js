@@ -10,16 +10,11 @@ function Config($stateProvider) {
 	});
 }
 
-function DeficiencySummaryController($state, $stateParams, Data, _){
+function DeficiencySummaryController($rootScope, $state, $stateParams, Data, _){
 	var dsc = this;
-	dsc.pageTitle = "CMS Entry";
+	dsc.rsc = $rootScope;
+
 	dsc.tiles = Data.tiles;
-	dsc.weekfilter = _.minBy(dsc.tiles, 'Week').Week;
-	dsc.order = 'CAP';
-	dsc.monitor = 'All';
-	dsc.status = {
-		isopen: false
-	};
 
 	dsc.goToDetail = function(cap_def) {
 		$state.go('detail', {
