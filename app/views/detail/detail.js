@@ -1,14 +1,15 @@
 function Config($stateProvider) {
 	$stateProvider
-	.state('summary', {
-		url: '/',
-		templateUrl: 'app/views/summary/summary.html',
-		controller: 'DeficiencySummaryController as dsc',
+	.state('detail', {
+		url: '/detail/:cap_plus_deficiency',
+		templateUrl: 'app/views/detail/detail.html',
+		controller: 'DeficiencyDetailsController as ddc',
 		params: {
 			prev_state_values: {}
 		}
 	});
 }
+
 function DeficiencyDetailsController($state, $stateParams, Data){
 	var ddc = this;
 

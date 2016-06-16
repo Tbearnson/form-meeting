@@ -4,28 +4,118 @@
 
 <div class="container">
 	<form role="form">
+		<!--CAP and Week-->
 		<div class="row">
 			<div class="form-group col-xs-2">
 				<label for="cap">CAP #</label>
-				<input type="text" class="form-control" id="cap">
+				<input type="text" class="form-control" id="cap" ng-model="ddc.data.CAP">
 			</div>
 			<div class="form-group col-xs-2">
 				<label for="week">Week</label>
 				<input type="text" class="form-control" id="week">
 			</div>
 		</div>
+		<!--Deficiency-->
 		<div class="row">
 			<div class="form-group col-xs-8">
 				<label for="deficiency">Deficiency</label>
 				<input type="text" class="form-control" id="deficiency">
 			</div>
 		</div>
+		<!-- Seperator and Title-->
 		<hr class="col-xs-12">
+		<h4>CAP Metrics</h4>
+		<!--Universe Size and Universe Scope-->
 		<div class="row">	
-			<div class="form-group col-xs-3">
-				<label for="mbw">Monitored by Whom?</label>
-				<input type="text" class="form-control" id="mbw">
+			<div class="form-group col-xs-2">
+				<label for="universe_size">Universe Size</label>
+				<input type="text" class="form-control" id="universe_size">
+			</div>
+			<div class="form-group col-xs-10">
+				<label for="universe_scope">Universe Scope</label>
+				<input type="textarea" class="form-control" id="universe_scope">
 			</div>		
-		</div>	
+		</div>
+		<!--Sample Size and Sample Size Desc.-->
+		<div class="row">	
+			<div class="form-group col-xs-2">
+				<label for="sample_size">Sample Size</label>
+				<input type="text" class="form-control" id="sample_size">
+			</div>
+			<div class="form-group col-xs-10">
+				<label for="sample_size_description">Sample Size Description</label>
+				<input type="textarea" class="form-control" id="sample_size_description">
+			</div>			
+		</div>
+		<!--Error Rate and Targets-->
+		<div class="row">	
+			<div class="form-group col-xs-2">
+				<label for="error_rate">Error Rate (%)</label>
+				<input type="text" class="form-control" id="error_rate">
+			</div>
+			<div class="form-group col-xs-2">
+				<label for="short_term_target">Short Term Target</label>
+				<input type="text" class="form-control" id="short_term_target">
+			</div>
+			<div class="form-group col-xs-2">
+				<label for="steady_state_target">Steady State Target</label>
+				<input type="text" class="form-control" id="steady_state_target">
+			</div>		
+		</div>
+		<!--Incorrect and Root Cause-->
+		<div class="row">	
+			<div class="form-group col-xs-2">
+				<label for="number_incorrect"># Incorrect</label>
+				<input type="text" class="form-control" id="number_incorrect">
+			</div>
+			<div class="form-group col-xs-8">
+				<label for="root_cause">Root Cause of Errors</label>
+				<input type="text" class="form-control" id="root_cause">
+			</div>
+		</div>
+		<!--Correct and Remediation Efforts-->
+		<div class="row">	
+			<div class="form-group col-xs-2">
+				<label for="number_incorrect"># Correct</label>
+				<input type="text" class="form-control" id="number_incorrect">
+			</div>
+			<div class="form-group col-xs-2">
+				<label for="remediation_efforts">Remediation Efforts</label>
+				<input type="text" class="form-control" id="remediation_efforts">
+			</div>		
+		</div>
+		<!--Members Impacted and Additional Notes-->
+		<div class="row">	
+			<div class="form-group col-xs-2">
+				<label for="number_members"># of Members Impacted</label>
+				<input type="text" class="form-control" id="number_members">
+			</div>
+			<div class="form-group col-xs-2">
+				<label for="additional_notes">Additional Notes</label>
+				<input type="text" class="form-control" id="additional_notes">
+			</div>			
+		</div>
+		<hr class="col-xs-12">
+		<!-- Seperator and Title-->
+		<h4>Designated Entities</h4>
+		<!-- Designated Entities-->
+		<div class="row">	
+			<div class="form-group col-xs-2">
+				<label for="number_members">Total DE potential</label>
+				<input type="text" class="form-control" id="number_members">
+			</div>
+			<div class="form-group col-xs-2">
+				<label for="de_included">DE's included in Data</label>
+				<input type="text" class="form-control" id="de_included">
+			</div>
+			<div class="form-group col-xs-2">
+				<label for="de_date">Date 100% expected</label>
+				<input type="text" class="form-control" id="de_date">
+			</div>
+			<div class="form-group col-xs-6">
+				<label for="de_notes">DE Notes</label>
+				<input type="text" class="form-control" id="de_notes">
+			</div>				
+		</div>
 	</form>
 </div>

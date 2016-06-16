@@ -1,14 +1,15 @@
 function Config($stateProvider) {
 	$stateProvider
-	.state('detail', {
-		url: '/detail/:cap_plus_deficiency',
-		templateUrl: 'app/views/detail/detail.html',
+	.state('summary', {
+		url: '/',
+		templateUrl: 'app/views/summary/summary.html',
 		controller: 'DeficiencySummaryController as dsc',
 		params: {
 			prev_state_values: {}
 		}
 	});
 }
+
 function DeficiencySummaryController($state, $stateParams, Data, _){
 	var dsc = this;
 	dsc.pageTitle = "CMS Entry";
