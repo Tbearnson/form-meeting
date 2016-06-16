@@ -1,4 +1,4 @@
-<div class="slideout-menu" ng-class="{'show': dsc.show_menu}">
+<div class="slideout-menu" ng-class="{'hint': dsc.hint_menu,'show': dsc.show_menu}">
 	<div>
 		Sort by
 		<div class="btn-group">
@@ -24,11 +24,48 @@
 
 		<select class="styled-select blue semi-square" ng-options="tile.Week as 'Week '+tile.Week for tile in dsc.tiles | unique:'Week'" ng-model="dsc.monitor"></select>
 	</div>
+
+	<div class="selectContainer" style="margin-bottom: 0px;">
+        <div style="height: 26px;">
+            <div class="button" tabindex="1" style="cursor: pointer; border-radius: 3px; display: inline-block; position: absolute; width: 150px; height: 24px; border: 1px solid rgb(216, 216, 217); margin: 0px; outline: none; background: rgb(216, 216, 217);">
+                <div class="buttonContentContainer" style="padding: 0px 10px; height: 24px; width: 130px; line-height: 24px;">
+                    <div class="buttonText" style="font-family: &quot;Open Sans&quot;; font-weight: normal; text-align: inherit; float: left; width: 112px; font-size: 10px; color: rgb(84, 88, 90);"><span style="white-space: nowrap;">0 Initial</span></div>
+                    <div class="dropdownChevronContainer" style="float: right; height: 24px;">
+                        <svg class="dropdownChevron" x="0" y="0" style="height: 24px; width: 8px;">
+                            <polyline points="0,0 4,4 8,0" transform="translate(0,9.5)" style="fill: none; stroke: rgb(84, 88, 90);"></polyline>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dropdown" style="border: 1px solid rgba(0, 0, 0, 0.2); border-radius: 3px; box-shadow: rgba(84, 88, 90, 0.2) 0px 0px 0px 3px; margin: 7px 0px; display: inline-block; overflow: auto; position: absolute; z-index: 1000; top: auto; left: auto; width: 250px; max-height: 250px; visibility: hidden; background: white;">
+            <ul class="dropdownList" style="margin: 0px; padding: 0px; list-style-type: none;">
+                <li class="dropdownItem" style="padding: 7px 20px 7px 10px; cursor: pointer; line-height: 18px; min-height: 18px; background: rgb(255, 255, 255);">
+                    <div class="dropdownItemContainer" style="word-wrap: normal; font-size: 10px;">All</div>
+                </li>
+                <li class="dropdownItem" style="padding: 7px 20px 7px 10px; cursor: pointer; line-height: 18px; min-height: 18px; background: rgb(242, 242, 243);">
+                    <div class="dropdownItemContainer" style="word-wrap: normal; font-size: 10px;">0 Initial</div>
+                </li>
+                <li class="dropdownItem" style="padding: 7px 20px 7px 10px; cursor: pointer; line-height: 18px; min-height: 18px; background: rgb(255, 255, 255);">
+                    <div class="dropdownItemContainer" style="word-wrap: normal; font-size: 10px;">1 Accepted</div>
+                </li>
+                <li class="dropdownItem" style="padding: 7px 20px 7px 10px; cursor: pointer; line-height: 18px; min-height: 18px; background: rgb(255, 255, 255);">
+                    <div class="dropdownItemContainer" style="word-wrap: normal; font-size: 10px;">2 Qualified</div>
+                </li>
+                <li class="dropdownItem" style="padding: 7px 20px 7px 10px; cursor: pointer; line-height: 18px; min-height: 18px; background: rgb(255, 255, 255);">
+                    <div class="dropdownItemContainer" style="word-wrap: normal; font-size: 10px;">3 Proposal</div>
+                </li>
+                <li class="dropdownItem" style="padding: 7px 20px 7px 10px; cursor: pointer; line-height: 18px; min-height: 18px; background: rgb(255, 255, 255);">
+                    <div class="dropdownItemContainer" style="word-wrap: normal; font-size: 10px;">4 Negotiate</div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 
 <div class="sidebar-container">
-	<div id="optionsDrawerBtn" class="optionsDrawer icon removed" ng-click="dsc.show_menu = !dsc.show_menu">
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50px" height="50px">
+	<div id="optionsDrawerBtn" class="optionsDrawer icon removed" ng-mouseenter="dsc.hint_menu = true" ng-mouseleave="dsc.hint_menu = false" >
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50px" height="50px"ng-click="dsc.show_menu = !dsc.show_menu">
 			<rect x="17" y="19" style="fill-rule:evenodd;clip-rule:evenodd;" width="16" height="2"/>
 			<rect x="17" y="24" style="fill-rule:evenodd;clip-rule:evenodd;" width="16" height="2"/>
 			<rect x="17" y="29" style="fill-rule:evenodd;clip-rule:evenodd;" width="16" height="2"/>
@@ -88,7 +125,7 @@
 
 	<!-- Main Content -->
 	<div class="tiles">
-		<div class="tile" ng-repeat="tile in dsc.tiles | filter:dsc.search_box | filter:{Week:dsc.weekfilter} | orderBy:dsc.order" ng-click="dsc.goToDetail(tile.CAP)" >
+		<div class="tile" ng-repeat="tile in dsc.tiles | filter:dsc.search_box | filter:{Week:dsc.weekfilter} | orderBy:dsc.order track by $index" ng-click="dsc.goToDetail(tile.CAP)" ng-mouseenter="dsc.hovered_tile = $index" ng-mouseleave="dsc.hovered_tile = undefined" ng-class="{'zoom': dsc.hovered_tile === $index}">
 			<div class="tile-detail">
 				<p>{{ tile.Deficiency }}</p>
 			</div>

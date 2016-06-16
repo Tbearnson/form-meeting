@@ -71,19 +71,24 @@ hr {
     top: 0px;
     width:30%;
     height: 100%;
-    background-color: #fff;
-    opacity: .9;
+    background-color: rgba(255,255,255,.9);
     border-right: 1px solid #e6e7e8;
     z-index: 1;
 
-    -webkit-transition: left .4s ease;
-    transition: left .4s ease;
+    -webkit-transition: left .2s ease;
+    transition: left .2s ease;
 }
-.slideout-menu.show {
+.slideout-menu.hint {
+	left: calc(-30% + 60px);
+
+	-webkit-transition: left .2s ease;
+    transition: left .2s ease;
+}
+.slideout-menu.show, .slideout-menu.show.hint {
 	left: 50px;
 
-	-webkit-transition: left .4s ease;
-    transition: left .4s ease;
+	-webkit-transition: left .2s ease;
+    transition: left .2s ease;
 }
 
 
@@ -108,7 +113,17 @@ hr {
 	margin-bottom: 10px;
 
 	overflow: hidden;
+
+	transform: scale(1,1);
+	-webkit-transition: transform .5s ease;
+	transition: transform .5s ease;
 }
+.tile.zoom {
+	-webkit-transition: transform .5s ease;
+	transition: transform .5s ease;
+	transform: scale(1.1,1.1);
+}
+
 .tile div {
 	/*display: inline-block;*/
 	display: table;
