@@ -6,4 +6,4 @@
 	app
 	.config(Config)
 	.constant('_', _);
-})(angular.module('cmsEntry',['ui.router','ui.bootstrap','angular.filter','ngAnimate']));
+})(angular.module('cmsEntry',['ui.router','ui.bootstrap','angular.filter','ngAnimate', 'utilities']));

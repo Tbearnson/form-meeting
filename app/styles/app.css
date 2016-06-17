@@ -1,6 +1,7 @@
 /* GLOBAL STYLES */
 body{
 	margin: 0;
+	/*font-family: 'Gotham';*/
 }
 
 .main-container {
@@ -19,6 +20,24 @@ body{
 
 	font-weight: 300;
 	text-align: left;
+}
+
+div.cigna-logo {
+	position: absolute;
+	bottom: 25px;
+	right: 125px;
+
+	height: 65px;
+	width: 122.12px;
+
+	background: #9ce;
+	background-image: url("/app/assets/cigna-logo.png");
+	background-size: 122.12px 65px;
+}
+#between-logo-plus {
+	position: absolute;
+	bottom: 50px;
+	right: 105px;
 }
 
 div.domo-logo {
