@@ -6,9 +6,17 @@ domo-dropdown {
 	width: 300px;
 	height: 28px;
 	margin-top: 10px;
-	margin-bottom: 20px;
+	margin-bottom: 40px;
 	margin-left: 25px;
 	margin-right: 25px;
+}
+
+domo-dropdown p.domo-dropdown-header {
+	margin-bottom: 10px;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: 1px;
+	color: rgba(0,0,0,.8);
 }
 
 domo-dropdown .domo-dropdown-display {
@@ -49,7 +57,7 @@ domo-dropdown .domo-dropdown-display i {
 
 domo-dropdown .domo-dropdown-list-container {
 	position: absolute;
-	top: 35px;
+	top: 60px;
 	left: 0px;
 
 	max-height: 0px;

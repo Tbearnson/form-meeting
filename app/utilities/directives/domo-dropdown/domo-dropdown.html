@@ -1,4 +1,5 @@
 <div class="domo-dropdown-container">
+	<p class="domo-dropdown-header">{{ddc.header.toUpperCase()}}</p>
 	<div class="domo-dropdown-display" ng-click="ddc.toggle();" ng-class="{'clicked': ddc.listVisible}">
 		<span ng-class="{'placeholder': !ddc.display}">{{ddc.selected || ddc.placeholder}}</span>
 		<i class="icon ion-chevron-down"></i>

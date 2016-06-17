@@ -24,6 +24,16 @@
     transition: left .2s ease;
 }
 
+.slideout-menu #slideout-menu-close {
+    position: relative;
+    top: 15px;
+    left: 310px;
+    padding-bottom: 15px;
+
+    font-size: 18px;
+    color: rgba(0,0,0,.3);
+}
+
 
 .sidebar-container {
 	background-color: #f2f2f2;

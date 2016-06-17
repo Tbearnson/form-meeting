@@ -5,6 +5,7 @@ function domoDropdown($document) {
 		scope: {},
 		controller: 'domoDropdownController as ddc',
 		bindToController: {
+			header: "@",
 			placeholder: "@",
 			list: "=",
 			selected: "=",

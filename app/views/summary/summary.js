@@ -14,7 +14,9 @@ function DeficiencySummaryController($timeout, $rootScope, $state, $stateParams,
 	var dsc = this;
 	dsc.rsc = $rootScope;
 
-	if (Data.all_data) dsc.tiles = Data.all_data;
+	if (Data.all_data) {
+		dsc.tiles = Data.metrics;
+	}
 	else {
 		$rootScope.$on('Data:initial', function(e, initial_data) {
 			$rootScope.$apply(function(){

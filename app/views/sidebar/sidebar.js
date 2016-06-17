@@ -7,7 +7,6 @@ function sidebar($document) {
 		link: function(scope, element, attr, ctrl) {
 			// Close element if click isn't on the icon or the menu itself
 			$document.bind('click', function(event){
-				console.log(event.target);
 				var isClickedElementChildOfSlideout = $('div.slideout-menu')
 					.find(event.target)
 					.length > 0;
@@ -34,9 +33,11 @@ function SidebarController($rootScope, $state, Data) {
 
 	$rootScope.$on('Data:initial', function(e, initial_data) {
 		sc.tiles = initial_data;
-		sc.weeks = _(sc.tiles).map(function(item){return item.Week;}).uniq().value();
+		sc.weeks = _(sc.tiles).map(function(item){return item.Week;}).uniq().value().reverse();
+		sc.statuses = ['All'].concat(_(sc.tiles).map(function(item){return item.Status;}).uniq().value());
 
 		sc.rsc.weekfilter = _.maxBy(sc.tiles, 'Week').Week;
+		sc.rsc.statusfilter = 'All';
 		sc.rsc.order = 'CAP';
 		sc.rsc.monitor = 'All';
 	});

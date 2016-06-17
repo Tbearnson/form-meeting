@@ -1,69 +1,11 @@
 <div class="slideout-menu" ng-class="{'hint': sc.hint,'show': sc.show}">
-	<!-- <div>
-		Sort by
-		<div class="btn-group">
-			<label class="btn btn-primary" ng-model="dsc.order" uib-btn-radio="'CAP'">Alphabetical</label>
-			<label class="btn btn-primary" ng-model="dsc.order" uib-btn-radio="'Status'">Status</label>
-		</div>
+	<div id="slideout-menu-close" ng-click="sc.show = false">
+		<i class="icon ion-close"></i>
 	</div>
 
-	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">		
-		<form class="navbar-form navbar-left" role="search">
-			<div class="form-group">
-				<input type="text" class="form-control" placeholder="Search" ng-model="sc.rsc.search">
-			</div>
-		</form>
-	</div>
+	<domo-dropdown header="Week" placeholder="Week" list="sc.weeks" selected="sc.rsc.weekfilter"></domo-dropdown>
 
-	<div class="btn-group">
-		<div class="filter-label"> Filter </div>
-
-		<select class="styled-select blue semi-square" ng-options="tile.Week as 'Week '+tile.Week for tile in dsc.tiles | unique:'Week'" ng-model="dsc.weekfilter"></select>
-
-		<select class="styled-select blue semi-square" ng-options="tile.Week as 'Week '+tile.Week for tile in dsc.tiles | unique:'Week'" ng-model="dsc.workstream"></select>
-
-		<select class="styled-select blue semi-square" ng-options="tile.Week as 'Week '+tile.Week for tile in dsc.tiles | unique:'Week'" ng-model="dsc.monitor"></select>
-	</div>
-
-	<div class="selectContainer" style="margin-bottom: 0px;">
-		<div style="height: 26px;">
-			<div class="button" tabindex="1" style="cursor: pointer; border-radius: 3px; display: inline-block; position: absolute; width: 150px; height: 24px; border: 1px solid rgb(216, 216, 217); margin: 0px; outline: none; background: rgb(216, 216, 217);">
-				<div class="buttonContentContainer" style="padding: 0px 10px; height: 24px; width: 130px; line-height: 24px;">
-					<div class="buttonText" style="font-family: &quot;Open Sans&quot;; font-weight: normal; text-align: inherit; float: left; width: 112px; font-size: 10px; color: rgb(84, 88, 90);"><span style="white-space: nowrap;">0 Initial</span></div>
-					<div class="dropdownChevronContainer" style="float: right; height: 24px;">
-						<svg class="dropdownChevron" x="0" y="0" style="height: 24px; width: 8px;">
-							<polyline points="0,0 4,4 8,0" transform="translate(0,9.5)" style="fill: none; stroke: rgb(84, 88, 90);"></polyline>
-						</svg>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="dropdown" style="border: 1px solid rgba(0, 0, 0, 0.2); border-radius: 3px; box-shadow: rgba(84, 88, 90, 0.2) 0px 0px 0px 3px; margin: 7px 0px; display: inline-block; overflow: auto; position: absolute; z-index: 1000; top: auto; left: auto; width: 250px; max-height: 250px; visibility: hidden; background: white;">
-			<ul class="dropdownList" style="margin: 0px; padding: 0px; list-style-type: none;">
-				<li class="dropdownItem" style="padding: 7px 20px 7px 10px; cursor: pointer; line-height: 18px; min-height: 18px; background: rgb(255, 255, 255);">
-					<div class="dropdownItemContainer" style="word-wrap: normal; font-size: 10px;">All</div>
-				</li>
-				<li class="dropdownItem" style="padding: 7px 20px 7px 10px; cursor: pointer; line-height: 18px; min-height: 18px; background: rgb(242, 242, 243);">
-					<div class="dropdownItemContainer" style="word-wrap: normal; font-size: 10px;">0 Initial</div>
-				</li>
-				<li class="dropdownItem" style="padding: 7px 20px 7px 10px; cursor: pointer; line-height: 18px; min-height: 18px; background: rgb(255, 255, 255);">
-					<div class="dropdownItemContainer" style="word-wrap: normal; font-size: 10px;">1 Accepted</div>
-				</li>
-				<li class="dropdownItem" style="padding: 7px 20px 7px 10px; cursor: pointer; line-height: 18px; min-height: 18px; background: rgb(255, 255, 255);">
-					<div class="dropdownItemContainer" style="word-wrap: normal; font-size: 10px;">2 Qualified</div>
-				</li>
-				<li class="dropdownItem" style="padding: 7px 20px 7px 10px; cursor: pointer; line-height: 18px; min-height: 18px; background: rgb(255, 255, 255);">
-					<div class="dropdownItemContainer" style="word-wrap: normal; font-size: 10px;">3 Proposal</div>
-				</li>
-				<li class="dropdownItem" style="padding: 7px 20px 7px 10px; cursor: pointer; line-height: 18px; min-height: 18px; background: rgb(255, 255, 255);">
-					<div class="dropdownItemContainer" style="word-wrap: normal; font-size: 10px;">4 Negotiate</div>
-				</li>
-			</ul>
-		</div>
-	</div> -->
-	<h4>WEEK</h4>
-	<domo-dropdown placeholder="Week" list="sc.weeks" selected="sc.rsc.weekfilter"></domo-dropdown>
+	<domo-dropdown header="Status" placeholder="Status" list="sc.statuses" selected="sc.rsc.statusfilter"></domo-dropdown>
 </div>
 
 <div class="sidebar-container">
