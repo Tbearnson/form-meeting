@@ -10,11 +10,16 @@ function Config($stateProvider) {
 	});
 }
 
-function DeficiencySummaryController($rootScope, $state, $stateParams, Data, _){
+function DeficiencySummaryController($timeout, $rootScope, $state, $stateParams, Data, _){
 	var dsc = this;
 	dsc.rsc = $rootScope;
 
-	dsc.tiles = Data.tiles;
+	Data.getAllData()
+	.then(function(all_data) {
+		$rootScope.$apply(function() {
+			dsc.rsc.tiles = all_data;
+		});
+	});
 
 	dsc.goToDetail = function(cap_def) {
 		$state.go('detail', {
