@@ -6,6 +6,13 @@ h4{
 	margin-bottom: 10px;
 }
 
-#number-metrics{
+/*#number-metrics{
 	border:1px solid #9ce;
+}*/
+.task{
+	padding-right: 0px !important;
+}
+
+.col-xs-10{
+	padding-left: 30px;
 }
