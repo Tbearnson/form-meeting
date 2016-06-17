@@ -1,4 +1,4 @@
-function domoDropdown() {
+function domoDropdown($document) {
 	return {
 		restrict: "E",
 		templateUrl: "app/utilities/directives/domo-dropdown/domo-dropdown.html",
@@ -9,6 +9,20 @@ function domoDropdown() {
 			list: "=",
 			selected: "=",
 			property: "@"
+		},
+		link: function(scope, element, attr, ctrl) {
+			$document.bind('click', function(event){
+				var isClickedElementChildOfDropdown = element
+					.find(event.target)
+					.length > 0;
+
+				if (isClickedElementChildOfDropdown) return;
+				else {
+					scope.$apply(function(){
+						ctrl.listVisible = false;
+					});
+				}
+			});
 		}
 	};
 }

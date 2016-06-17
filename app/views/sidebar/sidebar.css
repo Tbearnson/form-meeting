@@ -46,9 +46,10 @@
 }
 
 #sidebar-back {
-    margin-top: 15px;
-    margin-left: 20px;
-    margin-bottom: 15px;
+    position: relative;
+
+    height: 50px;
+    width: 50px;
 
     font-size: 18px;
 
@@ -58,4 +59,13 @@
 }
 #sidebar-back.show {
     transform: scale(1,1);
+}
+#sidebar-back i {
+    position: absolute;
+
+    top: 15px;
+    left: 20px;
+    /*padding-top: 15px;*/
+    /*margin-bottom: 15px;*/
+    /*margin-left: 20px;*/
 }
