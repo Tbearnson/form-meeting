@@ -37,3 +37,25 @@
 
     z-index: 10;
 }
+
+.sidebar-container hr {
+    margin: 0;
+    padding: 0;
+
+    border: 1px solid;
+}
+
+#sidebar-back {
+    margin-top: 15px;
+    margin-left: 20px;
+    margin-bottom: 15px;
+
+    font-size: 18px;
+
+    transform: scale(0,1);
+    -webkit-transition: transform .2s ease;
+    transition: transform .2s ease;
+}
+#sidebar-back.show {
+    transform: scale(1,1);
+}

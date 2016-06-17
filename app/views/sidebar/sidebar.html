@@ -67,6 +67,12 @@
 </div>
 
 <div class="sidebar-container">
+	<div id="sidebar-back" ui-sref="summary" ng-class="{show: sc.state === 'detail'}">
+		<i class="icon ion-chevron-left" ng-class="{show: sc.state === 'detail'}"></i>	
+	</div>
+	
+	<hr>
+
 	<div id="optionsDrawerBtn" class="optionsDrawer icon removed" ng-mouseenter="sc.hint = true" ng-mouseleave="sc.hint = false">
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50px" height="50px" ng-click="sc.show = !sc.show">
 			<rect x="17" y="19" style="fill-rule:evenodd;clip-rule:evenodd;" width="16" height="2"/>

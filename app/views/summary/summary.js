@@ -14,16 +14,21 @@ function DeficiencySummaryController($timeout, $rootScope, $state, $stateParams,
 	var dsc = this;
 	dsc.rsc = $rootScope;
 
-	Data.getAllData()
-	.then(function(all_data) {
-		$rootScope.$apply(function() {
-			dsc.rsc.tiles = all_data;
+	if (Data.all_data) dsc.tiles = Data.all_data;
+	else {
+		$rootScope.$on('Data:initial', function(e, initial_data) {
+			$rootScope.$apply(function(){
+				dsc.tiles = initial_data;
+			});
 		});
-	});
+	}
+		
 
-	dsc.goToDetail = function(cap_def) {
+	dsc.goToDetail = function(item) {
 		$state.go('detail', {
-			cap_plus_deficiency: cap_def,
+			cap: item['CAP #'],
+			week: item.Week,
+			cap_item: item,
 			prev_state_values: {
 				weekfilter: dsc.weekfilter,
 				order: dsc.order
