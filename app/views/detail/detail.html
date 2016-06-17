@@ -118,32 +118,44 @@
 				</div>
 			</uib-tab>
 			<uib-tab index="2" heading="Delegated Entities">
-				<!-- Designated Entities-->	
-				<div class="row">
-					<div class="form-group col-xs-2">
-						<label for="number_members">Total DE potential</label>
-						<input type="text" class="form-control" id="number_members" ng-model="ddc.data['Total DE potential']">
+				<div class="container-fluid">
+					<div class="row-fluid">
+						<div class="col-xs-3" id="number-metrics">
+							<!-- Designated Entities-->	
+							<div class="row">
+								<div class="form-group col-xs-12">
+									<label for="de_date">Date 100% expected</label>
+									<input type="text" class="form-control" id="de_date" ng-model="ddc.data['Date 100% expected']">
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-xs-12">
+									<label for="number_members">Total DE potential</label>
+									<input type="text" class="form-control" id="number_members" ng-model="ddc.data['Total DE potential']">
+								</div>
+							</div>
+							<div class="row">	
+								<div class="form-group col-xs-12">
+									<label for="de_included">DE's included in Data</label>
+									<input type="text" class="form-control" id="de_included" ng-model="ddc.data['DE\'s included in Data']">
+								</div>
+							</div>
+						</div>	
+						<div class="col-xs-9">
+								<div class="form-group col-xs-6">
+									<label for="de_notes">DE Notes</label>
+									<textarea class="form-control" id="de_notes" lines="16" ng-model="ddc.data['DE Notes']"></textarea>
+								</div>
+						</div>
 					</div>
-					<div class="form-group col-xs-2">
-						<label for="de_included">DE's included in Data</label>
-						<input type="text" class="form-control" id="de_included" ng-model="ddc.data['DE\'s included in Data']">
-					</div>
-					<div class="form-group col-xs-2">
-						<label for="de_date">Date 100% expected</label>
-						<input type="text" class="form-control" id="de_date" ng-model="ddc.data['Date 100% expected']">
-					</div>
-					<div class="form-group col-xs-6">
-						<label for="de_notes">DE Notes</label>
-						<input type="text" class="form-control" id="de_notes" ng-model="ddc.data['DE Notes']">
-					</div>				
-				</div>
+				</div>	
 			</uib-tab>
 			<uib-tab index="3" heading="Background">
 				<!--Universe Size and Universe Scope-->
 				<div class="row">	
 					<div class="form-group col-xs-10">
 						<label for="universe_scope">Universe Scope</label>
-						<input type="textarea" class="form-control" id="universe_scope" ng-model="ddc.data['Universe Scope']">
+						<input type="text" class="form-control" id="universe_scope" ng-model="ddc.data['Universe Scope']">
 					</div>		
 				</div>
 				<div class="row">
