@@ -1,7 +1,7 @@
-<div class="header">
-	<h1 class="pageTitle"> {{pageTitle}} </h1>
-</div>
-
+<!-- <div class="header">
+	<h1 class="page-title"> CAP Details </h1>
+</div> -->
+</br>
 <div class="container">
 	<form role="form">
 		<!--CAP and Week-->
@@ -22,107 +22,141 @@
 				<input type="text" class="form-control" id="deficiency" ng-model="ddc.data.Deficiency">
 			</div>
 		</div>
-		<!-- Seperator and Title-->
-		<hr class="col-xs-12">
-		<!--Universe Size and Universe Scope-->
-		<div class="row">	
-			<div class="form-group col-xs-2">
-				<label for="universe_size">Universe Size</label>
-				<input type="text" class="form-control" id="universe_size" ng-model="ddc.data['Universe Size']">
-			</div>
-			<div class="form-group col-xs-10">
-				<label for="universe_scope">Universe Scope</label>
-				<input type="textarea" class="form-control" id="universe_scope" ng-model="ddc.data['Universe Scope']">
-			</div>		
-		</div>
 	</form>
 	<form name="tabForm" class="tab-form">
 		<uib-tabset active="activeForm">
 			<uib-tab index="0" heading="Metrics">
-				<!--Error Rate and Targets-->
-				<div class="row">	
-					<div class="form-group col-xs-2">
-						<label for="error_rate">Error Rate (%)</label>
-						<input type="text" class="form-control" id="error_rate" ng-model="ddc.data['Sample Size description']" >
+				<div class="container-fluid">
+					<div class="row-fluid">
+						<div class="col-xs-2" id="number-metrics">
+							<div class="row">	
+								<div class="form-group">
+									<label for="error_rate">Error Rate (%)</label>
+									<input type="text" class="form-control" id="error_rate" ng-model="ddc.data['Sample Size description']" >
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group">
+									<label for="universe_size">Universe Size</label>
+									<input type="text" class="form-control" id="universe_size" ng-model="ddc.data['Universe Size']">
+								</div>
+							</div>		
+							<div class="row">	
+								<div class="form-group">
+									<label for="sample_size">Sample Size</label>
+									<input type="text" class="form-control" id="sample_size" ng-model="ddc.data['Sample Size']">
+								</div>			
+							</div>
+							<div class="row">	
+								<div class="form-group">
+									<label for="number_correct"># Correct</label>
+									<input type="text" class="form-control" id="number_correct" ng-model="ddc.data['Processed Correctly']">
+								</div>
+							</div>
+							<div class="row">	
+								<div class="form-group">
+									<label for="number_incorrect"># Incorrect</label>
+									<input type="text" class="form-control" id="number_incorrect" ng-model="ddc.data['Processed Incorrectly']">
+								</div>
+							</div>
+							<div class="row">	
+								<div class="form-group">
+									<label for="number_members">Members Impacted</label>
+									<input type="text" class="form-control" id="number_members" ng-model="ddc.data['Members Impacted']">
+								</div>
+							</div>
+
+						</div>
+						<div class='col-xs-1'></div>
+						<div class="col-xs-9">
+							<div class="row">
+								<div class="form-group col-xs-3">
+									<label for="short_term_target">Short Term Target</label>
+									<input type="text" class="form-control" id="short_term_target" ng-model="ddc.data['Short Term Target Error Rate']">
+								</div>
+								<div class="form-group col-xs-3">
+									<label for="steady_state_target">Steady State Target</label>
+									<input type="text" class="form-control" id="steady_state_target" ng-model="ddc.data['Steady State Target Error Rate']">
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group col-xs-3">
+									<label for="root_cause">Root Cause of Errors</label>
+									<textarea class="form-control" rows="4" id="root_cause" ng-model="ddc.data['Root Cause of Errors']"></textarea>
+								</div>
+								<div class="form-group col-xs-3">
+									<label for="remediation_efforts">Remediation Efforts</label>
+									<textarea class="form-control" rows="4" id="remediation_efforts" ng-model="ddc.data['Remediation Efforts']"></textarea>
+								</div>
+								<div class="form-group col-xs-3">
+									<label for="additional_notes">Additional Notes</label>
+									<textarea class="form-control" rows="4" id="additional_notes" ng-model="ddc.data['Additional notes']"></textarea>
+								</div>	
+							</div>						
+						</div>
 					</div>
-					<div class="form-group col-xs-2">
-						<label for="short_term_target">Short Term Target</label>
-						<input type="text" class="form-control" id="short_term_target" ng-model="ddc.data['Short Term Target Error Rate']">
-					</div>
-					<div class="form-group col-xs-2">
-						<label for="steady_state_target">Steady State Target</label>
-						<input type="text" class="form-control" id="steady_state_target" ng-model="ddc.data['Steady State Target Error Rate']">
-					</div>		
-				</div>
-				<!--Sample Size and Sample Size Desc.-->
-				<div class="row">	
-					<div class="form-group col-xs-2">
-						<label for="sample_size">Sample Size</label>
-						<input type="text" class="form-control" id="sample_size" ng-model="ddc.data['Sample Size']">
-					</div>
-					<div class="form-group col-xs-10">
-						<label for="sample_size_description">Sample Size Description</label>
-						<input type="textarea" class="form-control" id="sample_size_description" ng-model="ddc.data['Sample Size description']">
-					</div>			
-				</div>
-				<!--Incorrect and Root Cause-->
-				<div class="row">	
-					<div class="form-group col-xs-2">
-						<label for="number_incorrect"># Incorrect</label>
-						<input type="text" class="form-control" id="number_incorrect" ng-model="ddc.data['Processed Incorrectly']">
-					</div>
-					<div class="form-group col-xs-8">
-						<label for="root_cause">Root Cause of Errors</label>
-						<input type="text" class="form-control" id="root_cause" ng-model="ddc.data['Root Cause of Errors']">
-					</div>
-				</div>
-				<!--Correct and Remediation Efforts-->
-				<div class="row">	
-					<div class="form-group col-xs-2">
-						<label for="number_correct"># Correct</label>
-						<input type="text" class="form-control" id="number_correct" ng-model="ddc.data['Processed Correctly']">
-					</div>
-					<div class="form-group col-xs-10">
-						<label for="remediation_efforts">Remediation Efforts</label>
-						<input type="text" class="form-control" id="remediation_efforts" ng-model="ddc.data['Remediation Efforts']">
-					</div>		
-				</div>
-				<!--Members Impacted and Additional Notes-->
-				<div class="row">	
-					<div class="form-group col-xs-2">
-						<label for="number_members"># of Members Impacted</label>
-						<input type="text" class="form-control" id="number_members" ng-model="ddc.data['Members Impacted']">
-					</div>
-					<div class="form-group col-xs-10">
-						<label for="additional_notes">Additional Notes</label>
-						<input type="text" class="form-control" id="additional_notes" ng-model="ddc.data['Additional notes']">
-					</div>			
 				</div>
 			</uib-tab>
 			<uib-tab index="1" heading="Tasks">
-				Soon to come.
+				{{ddc.data.Tasks}}
+				<div class="task-row" ng-repeat="task in ddc.data.Tasks"></div>
 			</uib-tab>
 			<uib-tab index="2" heading="Delegated Entities">
-				<!-- Designated Entities-->
+				<!-- Designated Entities-->	
+				<div class="row">
+					<div class="form-group col-xs-2">
+						<label for="number_members">Total DE potential</label>
+						<input type="text" class="form-control" id="number_members" ng-model="ddc.data['Total DE potential']">
+					</div>
+					<div class="form-group col-xs-2">
+						<label for="de_included">DE's included in Data</label>
+						<input type="text" class="form-control" id="de_included" ng-model="ddc.data['DE\'s included in Data']">
+					</div>
+					<div class="form-group col-xs-2">
+						<label for="de_date">Date 100% expected</label>
+						<input type="text" class="form-control" id="de_date" ng-model="ddc.data['Date 100% expected']">
+					</div>
+					<div class="form-group col-xs-6">
+						<label for="de_notes">DE Notes</label>
+						<input type="text" class="form-control" id="de_notes" ng-model="ddc.data['DE Notes']">
+					</div>				
+				</div>
+			</uib-tab>
+			<uib-tab index="3" heading="Background">
+				<!--Universe Size and Universe Scope-->
 				<div class="row">	
-			<div class="form-group col-xs-2">
-				<label for="number_members">Total DE potential</label>
-				<input type="text" class="form-control" id="number_members" ng-model="ddc.data['Total DE potential']">
-			</div>
-			<div class="form-group col-xs-2">
-				<label for="de_included">DE's included in Data</label>
-				<input type="text" class="form-control" id="de_included" ng-model="ddc.data['DE\'s included in Data']">
-			</div>
-			<div class="form-group col-xs-2">
-				<label for="de_date">Date 100% expected</label>
-				<input type="text" class="form-control" id="de_date" ng-model="ddc.data['Date 100% expected']">
-			</div>
-			<div class="form-group col-xs-6">
-				<label for="de_notes">DE Notes</label>
-				<input type="text" class="form-control" id="de_notes" ng-model="ddc.data['DE Notes']">
-			</div>				
+					<div class="form-group col-xs-10">
+						<label for="universe_scope">Universe Scope</label>
+						<input type="textarea" class="form-control" id="universe_scope" ng-model="ddc.data['Universe Scope']">
+					</div>		
+				</div>
+				<div class="row">
+					<div class="form-group col-xs-2">
+						<label for="monitored_whom">Monitored by Whom?</label>
+						<input type="text" class="form-control" id="monitored_whom" ng-model="ddc.data['Monitored by Whom']">
+					</div>
+					<div class="form-group col-xs-2">
+						<label for="monitoring_method">Monitoring Methodology</label>
+						<input type="text" class="form-control" id="monitoring_method" ng-model="ddc.data['Monitoring Methodology']">
+					</div>
+					<div class="form-group col-xs-2">
+						<label for="mp_start">Monitoring Period Start</label>
+						<input type="text" class="form-control" id="mp_start" ng-model="ddc.data['Monitoring Period Start']">
+					</div>
+					<div class="form-group col-xs-6">
+						<label for="mp_end">Monitoring Period End</label>
+						<input type="text" class="form-control" id="mp_end" ng-model="ddc.data['Monitoring Period End']">
+					</div>				
+				</div>
+				<div class="row">
+					<div class="form-group col-xs-10">
+						<label for="sample_size_description">Sample Size Description</label>
+						<input type="textarea" class="form-control" id="sample_size_description" ng-model="ddc.data['Sample Size description']">
+					</div>
 				</div>
 			</uib-tab>
 		</uib-tabset>
 	</form>
+
+
 </div>
