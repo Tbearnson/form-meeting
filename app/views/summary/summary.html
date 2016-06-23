@@ -1,7 +1,3 @@
-<div class="header">
-	<h1 class="page-title">CAP Number Priorities</h1>
-</div>
-
 <div class="tiles">
 	<div class="tile" ng-repeat="tile in dsc.tiles | filter:dsc.rsc.search | filter:{Week:dsc.rsc.weekfilter}:true | categoryFilter:{Status:dsc.rsc.statusfilter}:{Status:'All'} | orderBy:dsc.rsc.order track by $index" ng-click="dsc.goToDetail(tile)" ng-mouseenter="dsc.hovered_tile = $index" ng-mouseleave="dsc.hovered_tile = undefined" ng-class="{'zoom': dsc.hovered_tile === $index}">
 		<div class="tile-detail">

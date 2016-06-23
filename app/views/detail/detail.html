@@ -27,12 +27,12 @@
 		<uib-tabset active="activeForm">
 			<uib-tab index="0" heading="Metrics">
 				<div class="container-fluid">
-					<div class="row-fluid">
+					<div class="row">
 						<div class="col-xs-2" id="number-metrics">
 							<div class="row">	
 								<div class="form-group">
 									<label for="error_rate">Error Rate (%)</label>
-									<input type="text" class="form-control" id="error_rate" ng-model="ddc.data['Sample Size description']" >
+									<input type="text" class="form-control" id="error_rate" ng-model="ddc.data['Error Rate']" >
 								</div>
 							</div>
 							<div class="row">
@@ -92,6 +92,10 @@
 								</div>	
 							</div>						
 						</div>
+					</div>
+					<div class="row submit-row">
+						<button class="btn btn-primary btn-lg save-button" disabled>Update</button>
+						<button class="btn btn-primary btn-lg save-button" disabled>Save</button>
 					</div>
 				</div>
 			</uib-tab>
@@ -168,6 +172,172 @@
 					<div class="form-group col-xs-10">
 						<label for="sample_size_description">Sample Size Description</label>
 						<input type="textarea" class="form-control" id="sample_size_description" ng-model="ddc.data['Sample Size description']">
+					</div>
+				</div>
+			</uib-tab>
+			<uib-tab index="4" heading="Locations">
+				<div class="row">
+					<div class="form-group col-xs-2">
+						<h4 for="monitored_whom">ALL</h4>
+
+						<div class="location-input-container error-rate-input">
+							<label>Error Rate</label><span class="error-message" ng-if="ddc.error_sum != ddc.data['Error Rate']">Warning - locations do not sum to total.</span><i class="icon ion-checkmark-round" ng-if="ddc.error_sum != undefined && activeForm === 4 && ddc.error_sum === ddc.data['Error Rate']" aria-hidden="true"></i>
+							<input type="number" class="form-control" id="monitored_whom" ng-model="ddc.data['Error Rate']">
+						</div>
+						<hr class="first"/>
+
+						<div class="location-input-container">
+							<label># Correct</label><span class="error-message" ng-if="ddc.correct_sum != ddc.data['Processed Correctly']">Warning - locations do not sum to total.</span><i class="icon ion-checkmark-round" ng-if="ddc.correct_sum != undefined && activeForm === 4 && ddc.correct_sum === ddc.data['Processed Correctly']" aria-hidden="true"></i>
+							<input type="number" class="form-control" id="monitored_whom" ng-model="ddc.data['Processed Correctly']">
+						</div>
+						<hr class="first"/>
+
+						<div class="location-input-container">
+							<label># Incorrect</label><span class="error-message" ng-if="ddc.incorrect_sum != ddc.data['Processed Incorrectly']">Warning - locations do not sum to total.</span><i class="icon ion-checkmark-round" ng-if="ddc.incorrect_sum != undefined && activeForm === 4 && ddc.incorrect_sum === ddc.data['Processed Incorrectly']" aria-hidden="true"></i>
+							<input type="number" class="form-control" id="monitored_whom" ng-model="ddc.data['Processed Incorrectly']">
+						</div>
+						<hr class="first"/>
+
+						<div class="location-input-container">
+							<label>Members Impacted</label><span class="error-message" ng-if="ddc.members_sum != ddc.data['Members Impacted']">Warning - locations do not sum to total.</span><i class="icon ion-checkmark-round" ng-if="ddc.members_sum != undefined && activeForm === 4 && ddc.members_sum === ddc.data['Members Impacted']" aria-hidden="true"></i>
+							<input type="number" class="form-control" id="monitored_whom" ng-model="ddc.data['Members Impacted']">
+						</div>
+						<hr class="first"/>
+					</div>
+					<div class="form-group col-xs-2">
+						<h4 for="monitored_whom">CHS</h4>
+
+						<div class="location-input-container error-rate-input">
+							<label>&nbsp;</label>
+							<input type="number" class="form-control" id="monitored_whom" ng-model="ddc.location_entries['CHS']['Error Rate']">
+						</div>
+						<hr />
+						
+						<div class="location-input-container">
+							<label>&nbsp;</label>
+							<input type="number" class="form-control" id="monitored_whom" ng-model="ddc.location_entries['CHS']['Processed Correctly']">
+						</div>
+						<hr />
+
+						<div class="location-input-container">
+							<label>&nbsp;</label>
+							<input type="number" class="form-control" id="monitored_whom" ng-model="ddc.location_entries['CHS']['Processed Incorrectly']">
+						</div>
+						<hr />
+
+						<div class="location-input-container">
+							<label>&nbsp;</label>
+							<input type="number" class="form-control" id="monitored_whom" ng-model="ddc.location_entries['CHS']['Members Impacted']">
+						</div>
+						<hr />
+					</div>
+					<div class="form-group col-xs-2">
+						<h4 for="monitoring_method">AZ</h4>
+
+						<div class="location-input-container error-rate-input">
+							<label>&nbsp;</label>
+							<input type="number" class="form-control" id="monitored_whom" ng-model="ddc.location_entries['AZ']['Error Rate']">
+						</div>
+						<hr />
+						
+						<div class="location-input-container">
+							<label>&nbsp;</label>
+							<input type="number" class="form-control" id="monitored_whom" ng-model="ddc.location_entries['AZ']['Processed Correctly']">
+						</div>
+						<hr />
+
+						<div class="location-input-container">
+							<label>&nbsp;</label>
+							<input type="number" class="form-control" id="monitored_whom" ng-model="ddc.location_entries['AZ']['Processed Incorrectly']">
+						</div>
+						<hr />
+
+						<div class="location-input-container">
+							<label>&nbsp;</label>
+							<input type="number" class="form-control" id="monitored_whom" ng-model="ddc.location_entries['AZ']['Members Impacted']">
+						</div>
+						<hr />
+					</div>
+					<div class="form-group col-xs-2">
+						<h4 for="mp_start">TX MMP</h4>
+
+						<div class="location-input-container error-rate-input">
+							<label>&nbsp;</label>
+							<input type="number" class="form-control" id="monitored_whom" ng-model="ddc.location_entries['TX MMP']['Error Rate']">
+						</div>
+						<hr />
+						
+						<div class="location-input-container">
+							<label>&nbsp;</label>
+							<input type="number" class="form-control" id="monitored_whom" ng-model="ddc.location_entries['TX MMP']['Processed Correctly']">
+						</div>
+						<hr />
+
+						<div class="location-input-container">
+							<label>&nbsp;</label>
+							<input type="number" class="form-control" id="monitored_whom" ng-model="ddc.location_entries['TX MMP']['Processed Incorrectly']">
+						</div>
+						<hr />
+
+						<div class="location-input-container">
+							<label>&nbsp;</label>
+							<input type="number" class="form-control" id="monitored_whom" ng-model="ddc.location_entries['TX MMP']['Members Impacted']">
+						</div>
+						<hr />
+					</div>
+					<div class="form-group col-xs-2">
+						<h4 for="mp_end">Leon</h4>
+
+						<div class="location-input-container error-rate-input">
+							<label>&nbsp;</label>
+							<input type="number" class="form-control" id="monitored_whom" ng-model="ddc.location_entries['Leon']['Error Rate']">
+						</div>
+						<hr />
+						
+						<div class="location-input-container">
+							<label>&nbsp;</label>
+							<input type="number" class="form-control" id="monitored_whom" ng-model="ddc.location_entries['Leon']['Processed Correctly']">
+						</div>
+						<hr />
+
+						<div class="location-input-container">
+							<label>&nbsp;</label>
+							<input type="number" class="form-control" id="monitored_whom" ng-model="ddc.location_entries['Leon']['Processed Incorrectly']">
+						</div>
+						<hr />
+
+						<div class="location-input-container">
+							<label>&nbsp;</label>
+							<input type="number" class="form-control" id="monitored_whom" ng-model="ddc.location_entries['Leon']['Members Impacted']">
+						</div>
+						<hr />
+					</div>				
+					<div class="form-group col-xs-2">
+						<h4 for="sample_size_description">FDRs / DEs</h4>
+
+						<div class="location-input-container error-rate-input">
+							<label>&nbsp;</label>
+							<input type="number" class="form-control" id="monitored_whom" ng-model="ddc.location_entries['FDRs / DEs']['Error Rate']">
+						</div>
+						<hr />
+						
+						<div class="location-input-container">
+							<label>&nbsp;</label>
+							<input type="number" class="form-control" id="monitored_whom" ng-model="ddc.location_entries['FDRs / DEs']['Processed Correctly']">
+						</div>
+						<hr />
+
+						<div class="location-input-container">
+							<label>&nbsp;</label>
+							<input type="number" class="form-control" id="monitored_whom" ng-model="ddc.location_entries['FDRs / DEs']['Processed Incorrectly']">
+						</div>
+						<hr />
+
+						<div class="location-input-container">
+							<label>&nbsp;</label>
+							<input type="number" class="form-control" id="monitored_whom" ng-model="ddc.location_entries['FDRs / DEs']['Members Impacted']">
+						</div>
+						<hr />
 					</div>
 				</div>
 			</uib-tab>

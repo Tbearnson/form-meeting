@@ -21,7 +21,8 @@ function Data($http, $q, $rootScope, domo) {
 						metric['CAP #'] = metric['CAP #'].split(' ')[0];
 
 						// Determine the status of each CAP item
-						metric.Status = metric['Error Rate'] ? (metric['Error Rate'] <= metric['Short Term Error Rate'] ? 'Green' : 'Red') : 'Yellow';
+						var target_rate = metric['Short Term Target Error Rate'] || .05;
+						metric.Status = (metric['Error Rate'] != undefined) ? (metric['Error Rate'] <= target_rate ? 'Green' : 'Red') : 'Yellow';
 
 						return metric;
 					});
