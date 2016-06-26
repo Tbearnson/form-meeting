@@ -1,45 +1,21 @@
-<html ng-app="cmsEntry">
-  <head>
-    <link rel="stylesheet" href="lib/bootstrap.min.css">
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="styles.min.css">
 
-    <link rel="stylesheet" href="app/styles/app.css" />
-    <link rel="stylesheet" href="app/styles/fonts.css">
-    <link rel="stylesheet" href="app/utilities/directives/domo-dropdown/domo-dropdown.css" />
-    <link rel="stylesheet" href="app/views/sidebar/sidebar.css" />
-    <link rel="stylesheet" href="app/views/summary/summary.css" />
-    <link rel="stylesheet" href="app/views/detail/detail.css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.3.3/ui-bootstrap-tpls.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.13.1/lodash.min.js"></script>
 
-    <script src="lib/jquery.min.js"></script>
-    <script src="lib/domo.js"></script>
-    <script src="lib/angular.min.js"></script>
-    <script type="text/javascript" src="lib/angular-ui-router.min.js"></script>
-    <script type="text/javascript" src="lib/angular-ui-bootstrap.min.js"></script>
-    <script src="lib/angular-animate.min.js"></script>
-    <script type="text/javascript" src="lib/angular-filter.min.js"></script>
-    <script type="text/javascript" src="lib/lodash.min.js"></script>
+<script type="text/javascript" src="app.js"></script>
 
-    <script src="app.js"></script>
-
-    <script src="app/utilities/utilities.js"></script>
-    <script src="app/utilities/services/Data.js"></script>
-    <script src="app/utilities/directives/domo-dropdown/domo-dropdown.js"></script>
-    <script src="app/utilities/filters/categoryFilter.js"></script>
-    <script src="app/views/sidebar/sidebar.js"></script>
-    <script src="app/views/summary/summary.js"></script>
-    <script src="app/views/detail/detail.js"></script>
-
-  </head>
-  
-  <body>
-    <sidebar></sidebar>
-
-    <div class="main-container">
-        <ui-view></ui-view>
-    </div>
-
-    <div class="cigna-logo"></div>
-    <i id="between-logo-plus" class="icon ion-plus"></i>
-    <div class="domo-logo"></div>
-  </body>
-</html>
+<div ng-app="cmsEntry">
+	<sidebar></sidebar>
+	<div class="main-container" ng-controller="DeficiencySummaryController">
+	    <ui-view></ui-view>
+	</div>
+	<div class="cigna-logo"></div><i id="between-logo-plus" class="icon ion-plus"></i>
+	<div class="domo-logo"></div>
+</div>
