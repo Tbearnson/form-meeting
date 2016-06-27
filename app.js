@@ -66,7 +66,7 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 			'<div class="sidebar-container">',
 			'	<div id="sidebar-back" ui-sref="summary" ng-class="{show: sc.state === \'detail\'}"><i id="sidebar-back-icon" class="icon ion-chevron-left" ng-class="{show: sc.state === \'detail\'}"></i></div>',
 			'	<hr>',
-			'	<div id="optionsDrawerBtn" class="optionsDrawer icon removed" ng-mouseenter="sc.hint = true" ng-mouseleave="sc.hint = false">',
+			'	<div id="optionsDrawerBtn" class="optionsDrawer icon removed" ng-if="sc.state === \'summary\'" ng-mouseenter="sc.hint = true" ng-mouseleave="sc.hint = false">',
 			'		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50px" height="50px" ng-click="sc.show = !sc.show">',
 			'			<rect x="17" y="19" style="fill-rule:evenodd;clip-rule:evenodd" width="16" height="2" />',
 			'			<rect x="17" y="24" style="fill-rule:evenodd;clip-rule:evenodd" width="16" height="2" />',
@@ -81,11 +81,11 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 		$templateCache.put("app/views/detail/detail.html",[
 			'<br>',
 			'<div class="container">',
-			'	<form role="form">',
+			'	<div role="form">',
 			'		<div class="row top-row">',
 			'			<div class="form-group col-xs-2">',
 			'				<label for="cap">CAP #</label>',
-			'				<input type="text" class="form-control" id="cap" ng-model="ddc.data[\'CAP #\']">',
+			'				<input type="text" class="form-control" id="cap" ng-model="ddc.data[\'CAP #\']" disabled>',
 			'			</div>',
 			'			<div class="form-group col-xs-2">',
 			'				<label for="week">Week</label>',
@@ -105,11 +105,11 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 			'		<div class="row">',
 			'			<div class="form-group col-xs-12">',
 			'				<label for="deficiency">Deficiency</label>',
-			'				<input type="text" class="form-control" id="deficiency" ng-model="ddc.data.Deficiency">',
+			'				<input type="text" class="form-control" id="deficiency" ng-model="ddc.data.Deficiency" disabled>',
 			'			</div>',
 			'		</div>',
-			'	</form>',
-			'	<form name="tabForm" class="tab-form">',
+			'	</div>',
+			'	<div name="tabForm" class="tab-form">',
 			'		<div uib-tabset active="activeForm">',
 			'			<div uib-tab index="0" heading="Metrics">',
 			'				<div class="container-fluid">',
@@ -192,10 +192,10 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 			'			</div>',
 			'			<div uib-tab index="1" heading="Tasks">',
 			'				<div class="row task-headers">',
-			'					<div class="form-group col-xs-4">',
+			'					<div class="form-group col-xs-3">',
 			'						<label for="task_description">Task</label>',
 			'					</div>',
-			'					<div class="form-group col-xs-4">',
+			'					<div class="form-group col-xs-3">',
 			'						<label for="task_reason_for_change">Reason for Change</label>',
 			'					</div>',
 			'					<div class="form-group col-xs-2">',
@@ -207,19 +207,25 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 			'				</div>',
 			'				<div class="task-rows-container">',
 			'					<div class="row task-row" ng-repeat="task in ddc.data.Tasks track by $index">',
-			'						<div class="form-group col-xs-4 task">',
+			'						<div class="form-group col-xs-3 task">',
 			'							<textarea class="form-control" id="task_description" ng-model="task[\'CAP Task\']"></textarea>',
 			'						</div>',
-			'						<div class="form-group col-xs-4 task">',
+			'						<div class="form-group col-xs-3 task">',
 			'							<textarea class="form-control" id="task_reason_for_change" ng-model="task[\'Reason for change (if applicable)\']"></textarea>',
 			'						</div>',
-			'						<div class="col-xs-4 task">',
-			'									<input type="text" class="form-control" id="task_status" ng-model="task[\'Status\']">',
-			'									<input type="text" class="form-control" id="task_delivery_date" ng-model="task[\'Delivery Date\']">',
-			'									<button type="button" class="btn btn-default" ng-click="ddc.removeTask($index)">Remove Task</button>',
+			'						<div class="col-xs-2 task">',
+			'							<input type="text" class="form-control" id="task_status" ng-model="task[\'Status\']">',
+			'						</div>',
+			'						<div class="form-group col-xs-2 task">',
+			'							<p class="input-group">',
+			'								<input type="text" class="form-control" uib-datepicker-popup="MM/dd/yyyy" ng-model="task[\'Delivery Date\']" is-open="task.delivery_date_open" ng-required="true" close-text="Close" datepicker-options="{\'maxMode\':\'day\'}"> <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="task.delivery_date_open = !task.delivery_date_open"><i class="glyphicon glyphicon-calendar"></i></button></span>',
+			'							</p>',
+			'						</div>',
+			'						<div class="col-xs-2 task task-row-button">',
+			'							<button type="button" class="btn btn-primary" ng-click="ddc.removeTask($index)">Remove Task</button>',
 			'						</div>',
 			'					</div>',
-			'					<button type="button" class="btn btn-enlarge btn-default add-task" ng-click="ddc.addTask()"><i class="icon ion-plus"></i> Add New Task</button>',
+			'					<button type="button" class="btn btn-lg btn-primary add-task" ng-click="ddc.addTask()"><i class="icon ion-plus"></i> Add New Task</button>',
 			'				</div>',
 			'			</div>',
 			'			<div uib-tab index="2" heading="Delegated Entities">',
@@ -405,7 +411,7 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 			'				</div>',
 			'			</div>',
 			'		</div>',
-			'	</form>',
+			'	</div>',
 			'</div>'].join('')
 		);
 	}
@@ -646,7 +652,7 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 		};
 	}
 
-	function DeficiencyDetailsController($rootScope, $scope, $state, $stateParams, $q, _, Data){
+	function DeficiencyDetailsController($rootScope, $scope, $state, $stateParams, $q, $uibModal, _, Data){
 		var ddc = this;
 		// Assign a value to ddc.data (whether or not we actually went to the summary page first)
 		if ($stateParams.cap_item['CAP #']) ddc.data = $stateParams.cap_item;
@@ -706,77 +712,114 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 				'Week': ddc.data.Week
 			});
 		};
+		ddc.removeTask = function(index) {
+			var modalInstance = $uibModal.open({
+				animation: true,
+				template: '<div class="row text-center"><h4>Are you sure you want to remove this task?</h4></div><div class="row"><div class="col-xs-6 col-xs-offset-4" style="padding-bottom: 20px"><button class="btn btn-primary btn-lg" ng-click="cmc.yes()" style="margin-right: 50px">YES</button><button class="btn btn-primary btn-lg save-button"" ng-click="cmc.no()">NO</button></div></div>',
+				controller: 'ConfirmModalController as cmc',
+				scope: $scope
+			});
+			modalInstance.result.then(function (should_remove) {
+				if (should_remove) ddc.data.Tasks.splice(index,1);
+			});
+		};
 
 		ddc.update = function() {
-			var now = new Date();
-			Data.writeCAPMetricRow([
-				ddc.data['CAP #'] || '',
-				ddc.data.Deficiency || '',
-				ddc.data['Monitored by Whom'] || '',
-				ddc.data['Monitoring Methodology'] || '',
-				ddc.data['Monitoring Period Start'].toMysqlDate() || '',
-				ddc.data['Monitoring Period End'].toMysqlDate() || '',
-				ddc.data['Universe Size'] || '',
-				ddc.data['Sample Size'] || '',
-				ddc.data['Processed Correctly'] || '',
-				ddc.data['Processed Incorrectly'] || '',
-				ddc.data['Error Rate'] || '',
-				ddc.data['Root Cause of Errors'] || '',
-				ddc.data['Members Impacted'] || '',
-				ddc.data['Remediation Efforts'] || '',
-				ddc.data['Additional notes'] || '',
-				ddc.data['Universe Scope'] || '',
-				ddc.data['Sample Size description'] || '',
-				ddc.data['Total DE potential'] || '',
-				ddc.data['DE\'s included in Data'] || '',
-				ddc.data['Date 100% expected'].toMysqlDate() || '',
-				ddc.data.Week || '',
-				ddc.data['Short Term Target Error Rate'] || '',
-				ddc.data['Steady State Target Error Rate'] || '',
-				now.toMysqlFormat(),
-				JSON.parse(localStorage.domo_user).USER_FULLNAME || ''
-			])
-			.then(function() {
-				console.log('SUGCESZ!');
-				return Data.writeCAPTaskRows(
-					ddc.data.Tasks.map(function(task) {
-						return [
-							ddc.data['CAP #'] || '',
-							ddc.data.Deficiency || '',
-							task['CAP Task'] || '',
-							task['Delivery Date'] || '',
-							task.Status || '',
-							task['Reason for change (if applicable)'] || '',
-							ddc.data.Week || '',
-							ddc.data['Most recent week'] || '',
-							ddc.data.SortOrder || '',
-							now.toMysqlFormat(),
-							JSON.parse(localStorage.domo_user).USER_FULLNAME || ''
-						];
-					})
-				);
-			})
-			.then(function() {
-				console.log('UHGHEN!');
-				return Data.writeCAPDrillRows(
-					_.keys(ddc.location_entries).map(function(location) {
-						return [
-							ddc.data['CAP #'] || '',
-							location || '',
-							ddc.data.Week || '',
-							ddc.location_entries[location]['Error Rate'] || '',
-							ddc.location_entries[location]['Processed Correctly'] || '',
-							ddc.location_entries[location]['Processed Incorrectly'] || '',
-							ddc.location_entries[location]['Members Impacted'] || '',
-							now.toMysqlFormat(),
-							JSON.parse(localStorage.domo_user).USER_FULLNAME || ''
-						];
-					})
-				);
-			})
-			.then(function() {
-				console.log('LAZZT');
+			$scope.week = ddc.data.Week;
+			$scope.cap = ddc.data['CAP #'];
+			$scope.new_one = ddc.is_new_week;
+			var modalInstance = $uibModal.open({
+				animation: true,
+				template: '<div class="row text-center"><h4>{{new_one ? \'Save a new record for\' : \'Update and overwrite current\'}} CAP #{{cap}} {{new_one ? \'\' : \'data\'}} for Week {{week}}?</h4></div><div class="row"><div class="col-xs-6 col-xs-offset-4" style="padding-bottom: 20px"><button class="btn btn-primary btn-lg" ng-click="cmc.yes()" style="margin-right: 50px">YES</button><button class="btn btn-primary btn-lg save-button"" ng-click="cmc.no()">NO</button></div></div>',
+				controller: 'ConfirmModalController as cmc',
+				scope: $scope
 			});
+
+			modalInstance.result.then(function (should_update) {
+				var domouser = JSON.parse(localStorage.domo_user).USER_FULLNAME;
+				if (should_update) {
+					var now = new Date();
+					Data.writeCAPMetricRow([
+						ddc.data['CAP #'] || '',
+						ddc.data.Deficiency || '',
+						ddc.data['Monitored by Whom'] || '',
+						ddc.data['Monitoring Methodology'] || '',
+						ddc.data['Monitoring Period Start'] instanceof Date ? ddc.data['Monitoring Period Start'].toMysqlDate() : (ddc.data['Monitoring Period Start'] ? ddc.data['Monitoring Period Start'] : ''),
+						ddc.data['Monitoring Period End'] instanceof Date ? ddc.data['Monitoring Period End'].toMysqlDate() : (ddc.data['Monitoring Period End'] ? ddc.data['Monitoring Period End'] : ''),
+						ddc.data['Universe Size'] || '',
+						ddc.data['Sample Size'] || '',
+						ddc.data['Processed Correctly'] || '',
+						ddc.data['Processed Incorrectly'] || '',
+						ddc.data['Error Rate'] || '',
+						ddc.data['Root Cause of Errors'] || '',
+						ddc.data['Members Impacted'] || '',
+						ddc.data['Remediation Efforts'] || '',
+						ddc.data['Additional notes'] || '',
+						ddc.data['Universe Scope'] || '',
+						ddc.data['Sample Size description'] || '',
+						ddc.data['Total DE potential'] || '',
+						ddc.data['DE\'s included in Data'] || '',
+						ddc.data['Date 100% expected'] instanceof Date ? ddc.data['Date 100% expected'].toMysqlDate() : (ddc.data['Date 100% expected'] ? ddc.data['Date 100% expected'] : ''),
+						ddc.data.Week || '',
+						ddc.data['Short Term Target Error Rate'] || '',
+						ddc.data['Steady State Target Error Rate'] || '',
+						now.toMysqlFormat(),
+						domouser || ''
+					])
+					.then(function() {
+						console.log('SUGCESZ!');
+						return Data.writeCAPTaskRows(
+							ddc.data.Tasks.map(function(task) {
+								return [
+									ddc.data['CAP #'] || '',
+									ddc.data.Deficiency || '',
+									task['CAP Task'] || '',
+									task['Delivery Date'] instanceof Date ? task['Delivery Date'].toMysqlDate() : (task['Delivery Date'] ? task['Delivery Date'] : ''),
+									task.Status || '',
+									task['Reason for change (if applicable)'] || '',
+									task.Week || '',
+									task['Most recent week'] || '',
+									now.toMysqlFormat(),
+									domouser || ''
+								];
+							})
+						);
+					})
+					.then(function() {
+						console.log('UHGHEN!');
+						return Data.writeCAPDrillRows(
+							_.keys(ddc.location_entries).map(function(location) {
+								return [
+									ddc.data['CAP #'] || '',
+									location || '',
+									ddc.data.Week || '',
+									ddc.location_entries[location]['Error Rate'] || '',
+									ddc.location_entries[location]['Processed Correctly'] || '',
+									ddc.location_entries[location]['Processed Incorrectly'] || '',
+									ddc.location_entries[location]['Members Impacted'] || '',
+									now.toMysqlFormat(),
+									domouser || ''
+								];
+							})
+						);
+					})
+					.then(function() {
+						console.log('LAZZT');
+						ddc.goToSummary();
+					});
+				}
+				else console.log('panzy.');
+			});
+		};
+	}
+	function ConfirmModalController($uibModalInstance) {
+		var cmc = this;
+
+		cmc.yes = function() {
+			return $uibModalInstance.close(true);
+		};
+		cmc.no = function() {
+			return $uibModalInstance.close(false);
 		};
 	}
 
@@ -786,7 +829,7 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 		the_data.writeCAPMetricRow = function(new_row) {
 			return $http({
 				method: 'POST',
-				url: AppHost + '/api/data/v3/datasources/0f4e371e-0d90-457c-8297-de9cd20cf84f/dataversions?append=latest',
+				url: AppHost + '/api/data/v3/datasources/e1997817-7fcb-40ca-bc9e-998a44b915a5/dataversions?append=latest',
 				headers: {
 					'Content-Type': 'text/csv',
 					'X-Domo-Developer-Token': '022423ca85b11d9abae9fb7020b7b6d685db36fac5e733ca'
@@ -797,7 +840,7 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 		the_data.writeCAPTaskRows = function(new_rows) {
 			return $http({
 				method: 'POST',
-				url: AppHost + '/api/data/v3/datasources/9f5d83e2-033e-41c9-ba90-2e80a4668c02/dataversions?append=latest',
+				url: AppHost + '/api/data/v3/datasources/081e2562-8975-4bb7-b624-669ae4b652df/dataversions?append=latest',
 				headers: {
 					'Content-Type': 'text/csv',
 					'X-Domo-Developer-Token': '022423ca85b11d9abae9fb7020b7b6d685db36fac5e733ca'
@@ -828,7 +871,7 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 					data: {"dataQuery":"{\"columns\":[{\"column\":\"CAP #\",\"exprType\":\"COLUMN\"},{\"column\":\"Deficiency\",\"exprType\":\"COLUMN\"},{\"column\":\"Monitored by Whom\",\"exprType\":\"COLUMN\"},{\"column\":\"Monitoring Methodology\",\"exprType\":\"COLUMN\"},{\"column\":\"Monitoring Start\",\"exprType\":\"COLUMN\"},{\"column\":\"Monitoring Stop\",\"exprType\":\"COLUMN\"},{\"column\":\"Universe Size\",\"exprType\":\"COLUMN\"},{\"column\":\"Sample Size\",\"exprType\":\"COLUMN\"},{\"column\":\"Processed Correctly\",\"exprType\":\"COLUMN\"},{\"column\":\"Processed Incorrectly\",\"exprType\":\"COLUMN\"},{\"column\":\"Error Rate\",\"exprType\":\"COLUMN\"},{\"column\":\"Root Cause of Errors\",\"exprType\":\"COLUMN\"},{\"column\":\"Members Impacted\",\"exprType\":\"COLUMN\"},{\"column\":\"Remediation Efforts\",\"exprType\":\"COLUMN\"},{\"column\":\"Additional notes\",\"exprType\":\"COLUMN\"},{\"column\":\"Universe Scope\",\"exprType\":\"COLUMN\"},{\"column\":\"Sample Size description\",\"exprType\":\"COLUMN\"},{\"column\":\"Total DE potential\",\"exprType\":\"COLUMN\"},{\"column\":\"DE's included in Data\",\"exprType\":\"COLUMN\"},{\"column\":\"Date 100% expected\",\"exprType\":\"COLUMN\"},{\"column\":\"Week\",\"exprType\":\"COLUMN\"},{\"column\":\"Short Term Target Error Rate\",\"exprType\":\"COLUMN\"},{\"column\":\"Steady State Target Error Rate\",\"exprType\":\"COLUMN\"},{\"column\":\"Last Modified\",\"exprType\":\"COLUMN\"},{\"column\":\"Updated By\",\"exprType\":\"COLUMN\"}],\"groupByColumns\":[],\"orderByColumns\":[],\"limit\":{\"limit\":10000,\"offset\":0}}","sqlSerializationContext":"{\"calendar\":\"StandardCalendar\"}"}
 				})
 				.then(function(cap_metrics_result) {
-					the_data.metrics = cap_metrics_result.data.rows.map(function(row) {
+					the_data.metrics = _.toPairs(_.groupBy(cap_metrics_result.data.rows.map(function(row) {
 						return {
 							"CAP #": row[0],
 							"Deficiency": row[1],
@@ -856,6 +899,10 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 							"Last Modified": row[23],
 							"Updated By": row[24]
 						};
+					}), function(item){return item['CAP #'] + item.Week;}))
+					.map(function(pair_item) {
+						var the_grouping_list = pair_item[1];
+						return _.maxBy(the_grouping_list, function(item){return item['Last Modified'];});
 					});
 					return $http({
 						url: AppHost + '/api/data/v2/datasources/081e2562-8975-4bb7-b624-669ae4b652df/data',
@@ -863,7 +910,7 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 						headers: {
 							'Content-Type': 'application/json; charset=UTF-8'
 						},
-						data: {"dataQuery":"{\"columns\":[{\"column\":\"CAP #\",\"exprType\":\"COLUMN\"},{\"column\":\"Deficiency\",\"exprType\":\"COLUMN\"},{\"column\":\"CAP Task\",\"exprType\":\"COLUMN\"},{\"column\":\"Delivery Date\",\"exprType\":\"COLUMN\"},{\"column\":\"Status\",\"exprType\":\"COLUMN\"},{\"column\":\"Reason for change (if applicable)\",\"exprType\":\"COLUMN\"},{\"column\":\"Week\",\"exprType\":\"COLUMN\"},{\"column\":\"Most recent week\",\"exprType\":\"COLUMN\"},{\"column\":\"SortOrder\",\"exprType\":\"COLUMN\"}],\"groupByColumns\":[],\"orderByColumns\":[],\"limit\":{\"limit\":10000,\"offset\":0}}","sqlSerializationContext":"{\"calendar\":\"StandardCalendar\"}"}
+						data: {"dataQuery":"{\"columns\":[{\"column\":\"CAP #\",\"exprType\":\"COLUMN\"},{\"column\":\"Deficiency\",\"exprType\":\"COLUMN\"},{\"column\":\"CAP Task\",\"exprType\":\"COLUMN\"},{\"column\":\"Delivery Date\",\"exprType\":\"COLUMN\"},{\"column\":\"Status\",\"exprType\":\"COLUMN\"},{\"column\":\"Reason for change (if applicable)\",\"exprType\":\"COLUMN\"},{\"column\":\"Week\",\"exprType\":\"COLUMN\"},{\"column\":\"Most recent week\",\"exprType\":\"COLUMN\"},{\"column\":\"Last Updated\",\"exprType\":\"COLUMN\"},{\"column\":\"Updated By\",\"exprType\":\"COLUMN\"}],\"groupByColumns\":[],\"orderByColumns\":[],\"limit\":{\"limit\":10000,\"offset\":0}}","sqlSerializationContext":"{\"calendar\":\"StandardCalendar\"}"}
 					});
 				})
 				.then(function(cap_tasks_result) {
@@ -872,7 +919,7 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 							'CAP #': row[0],
 							'Deficiency': row[1],
 							'CAP Task': row[2],
-							'Delivery Date': row[3],
+							'Delivery Date': row[3] ? new Date(row[3]) : '',
 							'Status': row[4],
 							'Reason for change (if applicable)': row[5],
 							'Week': row[6],
@@ -902,7 +949,7 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 						metric['Total DE potential'] = Number(metric['Total DE potential']);
 						metric.Tasks = the_data.tasks.filter(function(task, index) {
 							return task['CAP #'] == metric['CAP #'] && 
-								   task.Week == metric.Week;
+									 task.Week == metric.Week;
 						});
 
 						// Groom the CAP #
@@ -944,6 +991,7 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 	.directive('clickOutside', ['$document', '$parse', '$timeout', clickOutside])
 	.filter('categoryFilter', ['_', categoryFilter])
 	.controller('DeficiencySummaryController', ['$timeout', '$rootScope', '$state', '$stateParams', 'Data', '_', DeficiencySummaryController])
-	.controller('DeficiencyDetailsController', ['$rootScope', '$scope', '$state', '$stateParams', '$q', '_', 'Data', DeficiencyDetailsController])
+	.controller('DeficiencyDetailsController', ['$rootScope', '$scope', '$state', '$stateParams', '$q', '$uibModal', '_', 'Data', DeficiencyDetailsController])
+	.controller('ConfirmModalController', ['$uibModalInstance', ConfirmModalController])
 	.factory('Data', ['$http', '$q', '$rootScope', 'AppHost', Data]);
 })(angular.module('cmsEntry',['ui.router','ui.bootstrap','ngAnimate']));
