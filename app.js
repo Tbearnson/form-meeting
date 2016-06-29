@@ -48,7 +48,7 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 		);
 		$templateCache.put("app/views/summary/summary.html",[
 			'<div class="tiles">',
-			'	<div class="tile" ng-repeat="tile in dsc.tiles | filter:dsc.rsc.search | filter:{Week:dsc.rsc.weekfilter}:true | categoryFilter:{Status:dsc.rsc.statusfilter}:{Status:\'All\'} | orderBy:dsc.getCAP track by $index" ng-click="dsc.goToDetail(tile)" ng-mouseenter="dsc.hovered_tile = $index" ng-mouseleave="dsc.hovered_tile = undefined" ng-class="{\'zoom\': dsc.hovered_tile === $index}">',
+			'	<div class="tile" ng-repeat="tile in dsc.tiles | filter:dsc.rsc.search | weekFilter:dsc.rsc.weekfilter | categoryFilter:{Status:dsc.rsc.statusfilter}:{Status:\'All\'} | orderBy:dsc.getCAP track by $index" ng-click="dsc.goToDetail(tile)" ng-mouseenter="dsc.hovered_tile = $index" ng-mouseleave="dsc.hovered_tile = undefined" ng-class="{\'zoom\': dsc.hovered_tile === $index}">',
 			'		<div class="tile-detail">',
 			'			<p>{{ tile.Deficiency }}</p>',
 			'		</div>',
@@ -117,8 +117,8 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 			'						<div class="col-xs-2" id="number-metrics">',
 			'							<div class="row">',
 			'								<div class="form-group">',
-			'									<label for="error_rate">Error Rate (%)</label>',
-			'									<input type="number" step="any" min="0" class="form-control" id="error_rate" ng-model="ddc.data[\'Error Rate\']">',
+			'									<label for="error_rate">Error Rate</label>',
+			'									<input class="form-control" id="error_rate" ng-model="ddc.data[\'Error Rate\']" percentage-input>',
 			'								</div>',
 			'							</div>',
 			'							<div class="row">',
@@ -156,11 +156,11 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 			'							<div class="row">',
 			'								<div class="form-group col-xs-3">',
 			'									<label for="short_term_target">Short Term Target</label>',
-			'									<input type="number" step="any" min="0" class="form-control" id="short_term_target" ng-model="ddc.data[\'Short Term Target Error Rate\']">',
+			'									<input class="form-control" id="error_rate" ng-model="ddc.data[\'Short Term Target Error Rate\']" percentage-input>',
 			'								</div>',
 			'								<div class="form-group col-xs-3">',
 			'									<label for="steady_state_target">Steady State Target</label>',
-			'									<input type="number" step="any" min="0" class="form-control" id="steady_state_target" ng-model="ddc.data[\'Steady State Target Error Rate\']">',
+			'									<input class="form-control" id="error_rate" ng-model="ddc.data[\'Steady State Target Error Rate\']" percentage-input>',
 			'								</div>',
 			'								<div class="form-group col-xs-3">',
 			'									<label for="de_date">Date 100% expected</label>',
@@ -216,7 +216,7 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 			'						<div class="col-xs-2 task">',
 			'							<input type="text" class="form-control" id="task_status" ng-model="task[\'Status\']">',
 			'						</div>',
-			'						<div class="form-group col-xs-2 task">',
+			'						<div class="form-group col-xs-2">',
 			'							<p class="input-group">',
 			'								<input type="text" class="form-control" uib-datepicker-popup="MM/dd/yyyy" ng-model="task[\'Delivery Date\']" is-open="task.delivery_date_open" ng-required="true" close-text="Close" datepicker-options="{\'maxMode\':\'day\'}"> <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="task.delivery_date_open = !task.delivery_date_open"><i class="glyphicon glyphicon-calendar"></i></button></span>',
 			'							</p>',
@@ -225,8 +225,8 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 			'							<button type="button" class="btn btn-primary" ng-click="ddc.removeTask($index)">Remove Task</button>',
 			'						</div>',
 			'					</div>',
-			'					<button type="button" class="btn btn-lg btn-primary add-task" ng-click="ddc.addTask()"><i class="icon ion-plus"></i> Add New Task</button>',
 			'				</div>',
+			'				<button style="margin-left: 50px; margin-top: 15px" type="button" class="btn btn-lg btn-primary add-task" ng-click="ddc.addTask()"><i class="icon ion-plus"></i> Add New Task</button>',
 			'			</div>',
 			'			<div uib-tab index="2" heading="Delegated Entities">',
 			'				<div class="row">',
@@ -273,23 +273,23 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 			'					<div class="form-group col-xs-2">',
 			'						<h4>ALL</h4>',
 			'						<div class="location-input-container error-rate-input">',
-			'							<label>Error Rate</label><span class="error-message" ng-if="(ddc.error_sum ? ddc.error_sum : 0) !== (ddc.data[\'Error Rate\'] ? ddc.data[\'Error Rate\'] : 0)">Warning - locations do not sum to total.</span><i class="icon ion-checkmark-round" ng-if="ddc.error_sum != undefined && activeForm === 4 && ddc.error_sum === ddc.data[\'Error Rate\']" aria-hidden="true"></i>',
-			'							<input type="number" step="any" min="0" class="form-control" ng-model="ddc.data[\'Error Rate\']">',
+			'							<label>Error Rate</label>',
+			'							<input class="form-control" id="error_rate" ng-model="ddc.data[\'Error Rate\']" percentage-input>',
 			'						</div>',
 			'						<hr class="first">',
 			'						<div class="location-input-container">',
 			'							<label># Correct</label><span class="error-message" ng-if="(ddc.correct_sum ? ddc.correct_sum : 0) !== (ddc.data[\'Processed Correctly\'] ? ddc.data[\'Processed Correctly\'] : 0)">Warning - locations do not sum to total.</span><i class="icon ion-checkmark-round" ng-if="ddc.correct_sum != undefined && activeForm === 4 && ddc.correct_sum === ddc.data[\'Processed Correctly\']" aria-hidden="true"></i>',
-			'							<input type="number" min="0" class="form-control" ng-model="ddc.data[\'Processed Correctly\']">',
+			'							<input type="number" min="0" class="form-control" ng-model="ddc.data[\'Processed Correctly\']" disabled>',
 			'						</div>',
 			'						<hr class="first">',
 			'						<div class="location-input-container">',
 			'							<label># Incorrect</label><span class="error-message" ng-if="(ddc.incorrect_sum ? ddc.incorrect_sum : 0) !== (ddc.data[\'Processed Incorrectly\'] ? ddc.data[\'Processed Incorrectly\'] : 0)">Warning - locations do not sum to total.</span><i class="icon ion-checkmark-round" ng-if="ddc.incorrect_sum != undefined && activeForm === 4 && ddc.incorrect_sum === ddc.data[\'Processed Incorrectly\']" aria-hidden="true"></i>',
-			'							<input type="number" min="0" class="form-control" ng-model="ddc.data[\'Processed Incorrectly\']">',
+			'							<input type="number" min="0" class="form-control" ng-model="ddc.data[\'Processed Incorrectly\']" disabled>',
 			'						</div>',
 			'						<hr class="first">',
 			'						<div class="location-input-container">',
 			'							<label>Members Impacted</label><span class="error-message" ng-if="(ddc.members_sum ? ddc.members_sum : 0) !== (ddc.data[\'Members Impacted\'] ? ddc.data[\'Members Impacted\'] : 0)">Warning - locations do not sum to total.</span><i class="icon ion-checkmark-round" ng-if="ddc.members_sum != undefined && activeForm === 4 && ddc.members_sum === ddc.data[\'Members Impacted\']" aria-hidden="true"></i>',
-			'							<input type="number" min="0" class="form-control" ng-model="ddc.data[\'Members Impacted\']">',
+			'							<input type="number" min="0" class="form-control" ng-model="ddc.data[\'Members Impacted\']" disabled>',
 			'						</div>',
 			'						<hr class="first">',
 			'					</div>',
@@ -297,7 +297,7 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 			'						<h4>CHS</h4>',
 			'						<div class="location-input-container error-rate-input">',
 			'							<label>&nbsp;</label>',
-			'							<input type="number" step="any" min="0" class="form-control" ng-model="ddc.location_entries[\'CHS\'][\'Error Rate\']">',
+			'							<input class="form-control" id="error_rate" ng-model="ddc.ddc.location_entries[\'CHS\'][\'Error Rate\']" percentage-input>',
 			'						</div>',
 			'						<hr>',
 			'						<div class="location-input-container">',
@@ -320,7 +320,7 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 			'						<h4 for="monitoring_method">AZ</h4>',
 			'						<div class="location-input-container error-rate-input">',
 			'							<label>&nbsp;</label>',
-			'							<input type="number" step="any" min="0" class="form-control" ng-model="ddc.location_entries[\'AZ\'][\'Error Rate\']">',
+			'							<input class="form-control" id="error_rate" ng-model="ddc.ddc.location_entries[\'AZ\'][\'Error Rate\']" percentage-input>',
 			'						</div>',
 			'						<hr>',
 			'						<div class="location-input-container">',
@@ -343,7 +343,7 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 			'						<h4 for="mp_start">TX MMP</h4>',
 			'						<div class="location-input-container error-rate-input">',
 			'							<label>&nbsp;</label>',
-			'							<input type="number" step="any" min="0" class="form-control" ng-model="ddc.location_entries[\'TX MMP\'][\'Error Rate\']">',
+			'							<input class="form-control" id="error_rate" ng-model="ddc.ddc.location_entries[\'TX MMP\'][\'Error Rate\']" percentage-input>',
 			'						</div>',
 			'						<hr>',
 			'						<div class="location-input-container">',
@@ -366,7 +366,7 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 			'						<h4 for="mp_end">Leon</h4>',
 			'						<div class="location-input-container error-rate-input">',
 			'							<label>&nbsp;</label>',
-			'							<input type="number" step="any" min="0" class="form-control" ng-model="ddc.location_entries[\'Leon\'][\'Error Rate\']">',
+			'							<input class="form-control" id="error_rate" ng-model="ddc.ddc.location_entries[\'Leon\'][\'Error Rate\']" percentage-input>',
 			'						</div>',
 			'						<hr>',
 			'						<div class="location-input-container">',
@@ -389,7 +389,7 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 			'						<h4 for="sample_size_description">FDRs / DEs</h4>',
 			'						<div class="location-input-container error-rate-input">',
 			'							<label>&nbsp;</label>',
-			'							<input type="number" step="any" min="0" class="form-control" ng-model="ddc.location_entries[\'FDRs / DEs\'][\'Error Rate\']">',
+			'							<input class="form-control" id="error_rate" ng-model="ddc.ddc.location_entries[\'FDRs / DEs\'][\'Error Rate\']" percentage-input>',
 			'						</div>',
 			'						<hr>',
 			'						<div class="location-input-container">',
@@ -450,11 +450,11 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 
 		$rootScope.$on('Data:initial', function(e, initial_data) {
 			sc.tiles = initial_data;
-			sc.weeks = _(sc.tiles).map(function(item){return item.Week;}).uniq().value().reverse();
-			sc.rsc.weeks = sc.weeks;
+			sc.weeks = ['Most Recent'].concat(_(sc.tiles).map(function(item){return item.Week;}).uniq().value().reverse());
+			sc.rsc.weeks = ['Most Recent'].concat(sc.weeks);
 			sc.statuses = ['All'].concat(_(sc.tiles).map(function(item){return item.Status;}).uniq().value());
 
-			sc.rsc.weekfilter = _.maxBy(sc.tiles, 'Week').Week;
+			sc.rsc.weekfilter = 'Most Recent'; // _.maxBy(sc.tiles, 'Week').Week;
 			sc.rsc.statusfilter = 'All';
 			sc.rsc.order = 'CAP';
 			sc.rsc.monitor = 'All';
@@ -618,6 +618,14 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 			}
 		};
 	}
+	function weekFilter() {
+		return function(input, comparator) {
+			if (input) {
+				if ( comparator === 'Most Recent' ) return input.filter(function(item){return item.Week === item['Most Recent Week'];});
+				else return input.filter(function(item){return item.Week === comparator;});
+			}
+		};
+	}
 
 	function DeficiencySummaryController($timeout, $rootScope, $state, $stateParams, Data, _){
 		var dsc = this;
@@ -635,7 +643,7 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 		dsc.getCAP = function(a_obj) {
 			var a = a_obj['CAP #'];
 			var anum = (a+'').trim().match(/([0-9])*/g)[0]*1;
-			var astr = (a+'').trim().match(/[0-9]*(.*)/g)[1];
+			var astr = (a+'').trim().match(/[0-9]*(.*)/g)[0];
 			return twoDigits(anum)+astr;
 		};
 
@@ -652,7 +660,7 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 		};
 	}
 
-	function DeficiencyDetailsController($rootScope, $scope, $state, $stateParams, $q, $uibModal, _, Data){
+	function DeficiencyDetailsController($rootScope, $scope, $state, $stateParams, $q, $uibModal, $timeout, _, Data){
 		var ddc = this;
 		// Assign a value to ddc.data (whether or not we actually went to the summary page first)
 		if ($stateParams.cap_item['CAP #']) ddc.data = $stateParams.cap_item;
@@ -667,9 +675,11 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 			'AZ': {},
 			'TX MMP': {},
 			'Leon': {},
-			'FDRs / DEs': {},
+			'FDRs / DEs': {}
 		};
+		ddc.date_100_expected_open = false;
 		ddc.is_new_week = false;
+		if ( !(ddc.data['Date 100% expected'] instanceof Date) || isNaN(ddc.data['Date 100% expected'].getTime()) ) {ddc.data['Date 100% expected'] = new Date();}
 		$scope.$watch(function(){return ddc.data.Week;},function(new_val, old_val) {
 			if (!ddc.current_weeks) ddc.current_weeks = $rootScope.weeks;
 			ddc.is_new_week = (ddc.current_weeks.indexOf(ddc.data.Week*1) === -1);
@@ -746,13 +756,13 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 						ddc.data['Monitoring Methodology'] || '',
 						ddc.data['Monitoring Period Start'] instanceof Date ? ddc.data['Monitoring Period Start'].toMysqlDate() : (ddc.data['Monitoring Period Start'] ? ddc.data['Monitoring Period Start'] : ''),
 						ddc.data['Monitoring Period End'] instanceof Date ? ddc.data['Monitoring Period End'].toMysqlDate() : (ddc.data['Monitoring Period End'] ? ddc.data['Monitoring Period End'] : ''),
-						ddc.data['Universe Size'] || '',
-						ddc.data['Sample Size'] || '',
-						ddc.data['Processed Correctly'] || '',
-						ddc.data['Processed Incorrectly'] || '',
-						ddc.data['Error Rate'] || '',
+						ddc.data['Universe Size'] === undefined ? '' : ddc.data['Universe Size'],
+						ddc.data['Sample Size'] === undefined ? '' : ddc.data['Sample Size'],
+						ddc.data['Processed Correctly'] === undefined ? '' : ddc.data['Processed Correctly'],
+						ddc.data['Processed Incorrectly'] === undefined ? '' : ddc.data['Processed Incorrectly'],
+						ddc.data['Error Rate'] === undefined ? '' : ddc.data['Error Rate'] / 100,
 						ddc.data['Root Cause of Errors'] || '',
-						ddc.data['Members Impacted'] || '',
+						ddc.data['Members Impacted'] === undefined ? '' : ddc.data['Members Impacted'],
 						ddc.data['Remediation Efforts'] || '',
 						ddc.data['Additional notes'] || '',
 						ddc.data['Universe Scope'] || '',
@@ -761,14 +771,14 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 						ddc.data['DE\'s included in Data'] || '',
 						ddc.data['Date 100% expected'] instanceof Date ? ddc.data['Date 100% expected'].toMysqlDate() : (ddc.data['Date 100% expected'] ? ddc.data['Date 100% expected'] : ''),
 						ddc.data.Week || '',
-						ddc.data['Short Term Target Error Rate'] || '',
-						ddc.data['Steady State Target Error Rate'] || '',
+						ddc.data['Short Term Target Error Rate'] === undefined ? '' : ddc.data['Short Term Target Error Rate'] / 100,
+						ddc.data['Steady State Target Error Rate'] === undefined ? '' : ddc.data['Steady State Target Error Rate'] / 100,
 						now.toMysqlFormat(),
 						domouser || ''
 					])
 					.then(function() {
-						console.log('SUGCESZ!');
-						return Data.writeCAPTaskRows(
+						if (!ddc.data.Tasks.length) return $q.resolve();
+						return $timeout(function(){return Data.writeCAPTaskRows(
 							ddc.data.Tasks.map(function(task) {
 								return [
 									ddc.data['CAP #'] || '',
@@ -777,38 +787,35 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 									task['Delivery Date'] instanceof Date ? task['Delivery Date'].toMysqlDate() : (task['Delivery Date'] ? task['Delivery Date'] : ''),
 									task.Status || '',
 									task['Reason for change (if applicable)'] || '',
-									task.Week || '',
-									task['Most recent week'] || '',
+									ddc.data.Week || '',
+									ddc.data.Week || '',
 									now.toMysqlFormat(),
 									domouser || ''
 								];
 							})
-						);
+						);},500);
 					})
 					.then(function() {
-						console.log('UHGHEN!');
-						return Data.writeCAPDrillRows(
+						return $timeout(function(){return Data.writeCAPDrillRows(
 							_.keys(ddc.location_entries).map(function(location) {
 								return [
 									ddc.data['CAP #'] || '',
 									location || '',
 									ddc.data.Week || '',
-									ddc.location_entries[location]['Error Rate'] || '',
-									ddc.location_entries[location]['Processed Correctly'] || '',
-									ddc.location_entries[location]['Processed Incorrectly'] || '',
-									ddc.location_entries[location]['Members Impacted'] || '',
+									ddc.location_entries[location]['Error Rate'] === undefined ? '' : ddc.location_entries[location]['Error Rate'] / 100,
+									ddc.location_entries[location]['Processed Correctly'] === undefined ? '' : ddc.location_entries[location]['Processed Correctly'],
+									ddc.location_entries[location]['Processed Incorrectly'] === undefined ? '' : ddc.location_entries[location]['Processed Incorrectly'],
+									ddc.location_entries[location]['Members Impacted'] === undefined ? '' : ddc.location_entries[location]['Members Impacted'],
 									now.toMysqlFormat(),
 									domouser || ''
 								];
 							})
-						);
+						);},500);
 					})
 					.then(function() {
-						console.log('LAZZT');
 						ddc.goToSummary();
 					});
 				}
-				else console.log('panzy.');
 			});
 		};
 	}
@@ -820,6 +827,48 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 		};
 		cmc.no = function() {
 			return $uibModalInstance.close(false);
+		};
+	}
+	function percentageInput() {
+		return {
+			require: 'ngModel',
+			restrict: 'A',
+			scope: {},
+			link: function(scope, elem, attrs, ngModel) {
+
+				var unbindFirstWatch = scope.$watch(function(){return ngModel.$modelValue;}, function(new_val, old_val) {
+					var val = elem.val();
+					if ( val.match(/^\s*[0-9]*\.?[0-9]*/)[0] && val !== '' ) {
+						var the_num = val.match(/^\s*[0-9]*\.?[0-9]*/)[0];
+						ngModel.$setViewValue(the_num*100);
+						elem.val(_.round(the_num*100,2)+'%');
+					}
+					else {
+						elem.val('');
+					}
+					if (elem.val() === '%') elem.val('');
+					if (ngModel.$modelValue) unbindFirstWatch();
+				});
+
+				elem.on('focus', function() {
+					unbindFirstWatch();
+				});
+
+				elem.on('blur', function() {
+					var val = elem.val();
+					if ( val.match(/^\s*[0-9]*\.?[0-9]*/)[0] && val !== '' ) {
+						var the_num = val.match(/^\s*[0-9]*\.?[0-9]*/)[0];
+						scope.$apply(function(){
+							ngModel.$setViewValue(the_num*1);
+						});
+						elem.val(the_num+'%');
+					}
+					else {
+						elem.val('');
+					}
+					if (elem.val() === '%') elem.val('');
+				});
+			}
 		};
 	}
 
@@ -871,6 +920,13 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 					data: {"dataQuery":"{\"columns\":[{\"column\":\"CAP #\",\"exprType\":\"COLUMN\"},{\"column\":\"Deficiency\",\"exprType\":\"COLUMN\"},{\"column\":\"Monitored by Whom\",\"exprType\":\"COLUMN\"},{\"column\":\"Monitoring Methodology\",\"exprType\":\"COLUMN\"},{\"column\":\"Monitoring Start\",\"exprType\":\"COLUMN\"},{\"column\":\"Monitoring Stop\",\"exprType\":\"COLUMN\"},{\"column\":\"Universe Size\",\"exprType\":\"COLUMN\"},{\"column\":\"Sample Size\",\"exprType\":\"COLUMN\"},{\"column\":\"Processed Correctly\",\"exprType\":\"COLUMN\"},{\"column\":\"Processed Incorrectly\",\"exprType\":\"COLUMN\"},{\"column\":\"Error Rate\",\"exprType\":\"COLUMN\"},{\"column\":\"Root Cause of Errors\",\"exprType\":\"COLUMN\"},{\"column\":\"Members Impacted\",\"exprType\":\"COLUMN\"},{\"column\":\"Remediation Efforts\",\"exprType\":\"COLUMN\"},{\"column\":\"Additional notes\",\"exprType\":\"COLUMN\"},{\"column\":\"Universe Scope\",\"exprType\":\"COLUMN\"},{\"column\":\"Sample Size description\",\"exprType\":\"COLUMN\"},{\"column\":\"Total DE potential\",\"exprType\":\"COLUMN\"},{\"column\":\"DE's included in Data\",\"exprType\":\"COLUMN\"},{\"column\":\"Date 100% expected\",\"exprType\":\"COLUMN\"},{\"column\":\"Week\",\"exprType\":\"COLUMN\"},{\"column\":\"Short Term Target Error Rate\",\"exprType\":\"COLUMN\"},{\"column\":\"Steady State Target Error Rate\",\"exprType\":\"COLUMN\"},{\"column\":\"Last Modified\",\"exprType\":\"COLUMN\"},{\"column\":\"Updated By\",\"exprType\":\"COLUMN\"}],\"groupByColumns\":[],\"orderByColumns\":[],\"limit\":{\"limit\":10000,\"offset\":0}}","sqlSerializationContext":"{\"calendar\":\"StandardCalendar\"}"}
 				})
 				.then(function(cap_metrics_result) {
+					var cap_num_weeks = _.mapValues(
+						_.groupBy(cap_metrics_result.data.rows.map(function(row){return {'CAP #': row[0], 'Week': row[20]};}), 'CAP #'),
+						function(cap_weeks_array) {
+							return _.uniq(cap_weeks_array.map(function(item){return item.Week;}));
+						}
+					);
+
 					the_data.metrics = _.toPairs(_.groupBy(cap_metrics_result.data.rows.map(function(row) {
 						return {
 							"CAP #": row[0],
@@ -894,6 +950,7 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 							"DE's included in Data": row[18],
 							"Date 100% expected": row[19] ? new Date(row[19]) : '',
 							"Week": row[20],
+							"Most Recent Week": _.max(cap_num_weeks[row[0]]),
 							"Short Term Target Error Rate": row[21],
 							"Steady State Target Error Rate": row[22],
 							"Last Modified": row[23],
@@ -914,7 +971,7 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 					});
 				})
 				.then(function(cap_tasks_result) {
-					the_data.tasks = cap_tasks_result.data.rows.map(function(row) {
+					the_data.tasks = _.toPairs(_.groupBy(cap_tasks_result.data.rows.map(function(row) {
 						return {
 							'CAP #': row[0],
 							'Deficiency': row[1],
@@ -928,6 +985,10 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 							'Last Updated': row[9],
 							'Updated By': row[10]
 						};
+					}), function(item){return item['CAP #'] + item.Week + item['CAP Task'];}))
+					.map(function(pair_item) {
+						var the_grouping_list = pair_item[1];
+						return _.maxBy(the_grouping_list, function(item){return item['Last Updated'];});
 					});
 
 					// Get whitelisted CAPs
@@ -990,8 +1051,10 @@ Date.prototype.toMysqlDate = function() {return this.getFullYear() + "-" + twoDi
 	.controller('domoDropdownController', [domoDropdownController])
 	.directive('clickOutside', ['$document', '$parse', '$timeout', clickOutside])
 	.filter('categoryFilter', ['_', categoryFilter])
+	.filter('weekFilter', [weekFilter])
 	.controller('DeficiencySummaryController', ['$timeout', '$rootScope', '$state', '$stateParams', 'Data', '_', DeficiencySummaryController])
-	.controller('DeficiencyDetailsController', ['$rootScope', '$scope', '$state', '$stateParams', '$q', '$uibModal', '_', 'Data', DeficiencyDetailsController])
+	.controller('DeficiencyDetailsController', ['$rootScope', '$scope', '$state', '$stateParams', '$q', '$uibModal', '$timeout', '_', 'Data', DeficiencyDetailsController])
 	.controller('ConfirmModalController', ['$uibModalInstance', ConfirmModalController])
+	.directive('percentageInput', [percentageInput])
 	.factory('Data', ['$http', '$q', '$rootScope', 'AppHost', Data]);
 })(angular.module('cmsEntry',['ui.router','ui.bootstrap','ngAnimate']));
